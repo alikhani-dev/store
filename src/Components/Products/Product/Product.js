@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from './style.module.css'
 
-const Product = ({ id, title, price, image }) => {
+const Product = ({ id, title, image }) => {
 	return (
 		<div className={styles.card}>
 			<Link to={`product/${id}`} className={styles.link} />

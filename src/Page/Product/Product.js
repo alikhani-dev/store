@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { get } from '../../service/axios'
-const Product = () => {
-	const [data, setData] = useState()
+import { useProducts } from './../../Context'
+import styles from './style.module.css'
+const ProductItem = () => {
+	const [product, setProduct] = useState()
+	const { loading, products } = useProducts()
 	const { id } = useParams()
+
 	useEffect(() => {
-		get(`https://fakestoreapi.com/products/${id}`).then(({ data, status }) => {
-			if (status === 200) setData(data)
-		})
-	}, [])
-	let show
-	if (data) {
-		show = <div>{data.title}</div>
-	} else {
-		show = <p>please wait ...</p>
-	}
-	return show
+		if (products) {
+			setProduct(products.find((product) => product.id === Number(id)))
+		}
+	}, [id, products])
+	return loading ? <p>please wait ...</p> : <div></div>
 }
 
-export default Product
+export default ProductItem
