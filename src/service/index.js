@@ -1,17 +1,22 @@
 import axios from 'axios'
 
-export const get = async (url, config) => {
-	return await axios.get(url, config && config)
-}
+const instance = axios.create({
+	// baseURL: 'https://fakestoreapi.com/',
+	baseURL: 'https://mocki.io/',
+})
 
-export const post = async (url, data, config) => {
-	return await axios.post(url, data && data, config && config)
+export const get = async (url, config) => {
+	return await instance.get(url, config && config)
 }
 
 export const remove = async (url, config) => {
-	return await axios.delete(url, config && config)
+	return await instance.delete(url, config && config)
+}
+
+export const post = async (url, data, config) => {
+	return await instance.post(url, data && data, config && config)
 }
 
 export const put = async (url, data, config) => {
-	return await axios.put(url, data && data, config && config)
+	return await instance.put(url, data && data, config && config)
 }

@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 400px;
+}
+
+.wrapperImg {
+    width: 50%;
+    height: 100%;
+}
+
+.img {
+    width: 100%;
+    height: auto;
+}

@@ -7,11 +7,6 @@
     border-radius: 5px;
 }
 
-.link {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
 
 .wrapperImg {
     overflow: hidden;

@@ -1,17 +1,20 @@
-import Main from '../../layout/Main'
-import Products from '../../Components/Products'
-import { useProducts } from './../../Context'
+import { useEffect, useState } from 'react'
+import Loader from '../../Components/Loader'
+import { useData } from '../../Context'
+import Main from '../../Layout/Main'
+import Product from '../../Components/Product'
 
 const Home = () => {
-	const { loading } = useProducts()
+	const [items, setItems] = useState()
+	const { loading, products } = useData()
 
-	return loading ? (
-		<p>please wait...</p>
-	) : (
-		<Main>
-			<Products />
-		</Main>
-	)
+	useEffect(() => {
+		if (products) {
+			setItems(products.map((product) => <Product key={product.id} data={product} />))
+		}
+	}, [products])
+
+	return loading ? <Loader /> : <Main>{items}</Main>
 }
 
 export default Home

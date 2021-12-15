@@ -1,24 +1,24 @@
 import { createContext, useReducer, useContext, useLayoutEffect } from 'react'
-import { get } from '../service'
+import { get } from '../Service'
 
-const StateContext = createContext()
-const DispatcherContext = createContext()
+const dataContext = createContext()
+const dataDispatch = createContext()
 
-export const useDispatch = () => {
-	const context = useContext(DispatcherContext)
+export const useDataDispatch = () => {
+	const context = useContext(dataDispatch)
 
 	if (!context) {
-		throw new Error('DispatcherContext must be used with a Provider')
+		throw new Error('dataDispatch must be used with a Provider')
 	}
 
 	return context
 }
 
-export const useProducts = () => {
-	const context = useContext(StateContext)
+export const useData = () => {
+	const context = useContext(dataContext)
 
-	if (!context) {
-		throw new Error('StateContext must be used with a Provider')
+    if (!context) {
+		throw new Error('dataContext must be used with a Provider')
 	}
 
 	return context
@@ -54,21 +54,19 @@ const reducer = (state, action) => {
 	}
 }
 
-const ProductsProvider = ({ children }) => {
+export const ProductsProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const newDispatch = value(dispatch)
 
 	useLayoutEffect(() => {
-		get(`https://fakestoreapi.com/products`)
+		get(`v1/f81a2815-e9bd-4fc8-83d7-bfe5f9411145`)
 			.then(({ data }) => newDispatch.successRequestProducts(data))
 			.catch((e) => newDispatch.filedRequestProducts(e))
 	}, [])
 
 	return (
-		<StateContext.Provider value={state}>
-			<DispatcherContext.Provider value={newDispatch}>{children}</DispatcherContext.Provider>
-		</StateContext.Provider>
+		<dataContext.Provider value={state}>
+			<dataDispatch.Provider value={newDispatch}>{children}</dataDispatch.Provider>
+		</dataContext.Provider>
 	)
 }
-
-export default ProductsProvider
