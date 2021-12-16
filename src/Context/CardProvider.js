@@ -42,19 +42,23 @@ const reducer = (state, action) => {
 	const { type } = action
 
 	switch (type) {
-		//! FIX BUG
+		//!Not best way
 		case actions.INCREMENT_PRODUCT: {
 			const id = action.payload
-			const index = state.selectedItem.findIndex((item) => item.id === id)
-			console.log(state.selectedItem[index].count)
-			return { ...state }
+			const findIndex = state.selectedItem.findIndex((item) => item.id === id)
+			const filterProducts = state.selectedItem.filter((item) => item.id !== id)
+			const newProduct = state.selectedItem[findIndex]
+			filterProducts.push({ ...newProduct, count: newProduct.count + 1 })
+			return { ...state, selectedItem: [...filterProducts] }
 		}
-		//! FIX BUG
+		//!Not best way
 		case actions.DECREMENT_PRODUCT: {
 			const id = action.payload
-			const index = state.selectedItem.findIndex((item) => item.id === id)
-			state.selectedItem[index].count--
-			return { ...state }
+			const findIndex = state.selectedItem.findIndex((item) => item.id === id)
+			const filterProducts = state.selectedItem.filter((item) => item.id !== id)
+			const newProduct = state.selectedItem[findIndex]
+			filterProducts.push({ ...newProduct, count: newProduct.count - 1 })
+			return { ...state, selectedItem: [...filterProducts] }
 		}
 
 		case actions.ADD_PRODUCT: {
@@ -87,7 +91,7 @@ const value = (dispatch) => {
 		addProduct: (payload) => dispatch({ type: actions.ADD_PRODUCT, payload }),
 		removeProduct: (payload) => dispatch({ type: actions.REMOVE_PRODUCT, payload }),
 		incrementProduct: (payload) => dispatch({ type: actions.INCREMENT_PRODUCT, payload }),
-		decrementProduct: () => dispatch({ type: actions.DECREMENT_PRODUCT }),
+		decrementProduct: (payload) => dispatch({ type: actions.DECREMENT_PRODUCT, payload }),
 		clearProduct: () => dispatch({ type: actions.CLEAR }),
 		payOff: () => dispatch({ type: actions.PAYOFF }),
 	}

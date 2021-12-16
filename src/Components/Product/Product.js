@@ -22,6 +22,7 @@ const Product = ({ data }) => {
 				) : (
 					<button onClick={() => addProduct(data)}>add Card</button>
 				)}
+				{status && <button onClick={() => decrementProduct(id)}>-</button>}
 			</div>
 		</div>
 	)
