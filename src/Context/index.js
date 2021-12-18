@@ -1,2 +1,2 @@
-export { useCard, useCardDispatch, CardProvider } from './CardProvider'
-export { useData, useDataDispatch, ProductsProvider } from './ProductsProvider'
+export { useCart, useCartDispatch, CartProvider } from './CartProvider'
+export { useProducts, useProductsDispatch, ProductsProvider } from './ProductsProvider'

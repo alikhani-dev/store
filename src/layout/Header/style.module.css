@@ -51,18 +51,18 @@
 
 }
 
-.card {
+.cart {
     position: relative;
     color: #fff;
     background-color: #317dc4;
     margin: 0 15px;
 }
 
-.card:hover {
+.cart:hover {
     background-color: #0084ff;
 }
 
-.card .badge {
+.cart .badge {
     position: absolute;
     color: #fff;
     background-color: #333;

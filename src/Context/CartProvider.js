@@ -1,23 +1,23 @@
 import { createContext, useReducer, useContext } from 'react'
 
-const CardState = createContext()
-const CardDispatch = createContext()
+const CartState = createContext()
+const CartDispatch = createContext()
 
-export const useCardDispatch = () => {
-	const context = useContext(CardDispatch)
+export const useCartDispatch = () => {
+	const context = useContext(CartDispatch)
 
 	if (!context) {
-		throw new Error('CardDispatch must be used with a Provider')
+		throw new Error('CartDispatch must be used with a Provider')
 	}
 
 	return context
 }
 
-export const useCard = () => {
-	const context = useContext(CardState)
+export const useCart = () => {
+	const context = useContext(CartState)
 
 	if (!context) {
-		throw new Error('CardState must be used with a Provider')
+		throw new Error('CartState must be used with a Provider')
 	}
 
 	return context
@@ -38,43 +38,45 @@ const initialState = {
 	selectedItem: [],
 }
 
+const totalProducts = (arr) => {
+	return arr.reduce((total, product) => total + product.price * product.count, 0)
+}
+
 const reducer = (state, action) => {
 	const { type } = action
 
 	switch (type) {
-		//!Not best way
 		case actions.INCREMENT_PRODUCT: {
 			const id = action.payload
-			const findIndex = state.selectedItem.findIndex((item) => item.id === id)
-			const filterProducts = state.selectedItem.filter((item) => item.id !== id)
-			const newProduct = state.selectedItem[findIndex]
-			filterProducts.push({ ...newProduct, count: newProduct.count + 1 })
-			return { ...state, selectedItem: [...filterProducts] }
+			const index = state.selectedItem.findIndex((item) => item.id === id)
+			let newSelected = [...state.selectedItem]
+			newSelected[index] = { ...newSelected[index], count: newSelected[index].count + 1 }
+			return { ...state, selectedItem: newSelected, total: totalProducts(newSelected) }
 		}
-		//!Not best way
+
 		case actions.DECREMENT_PRODUCT: {
 			const id = action.payload
-			const findIndex = state.selectedItem.findIndex((item) => item.id === id)
-			const filterProducts = state.selectedItem.filter((item) => item.id !== id)
-			const newProduct = state.selectedItem[findIndex]
-			filterProducts.push({ ...newProduct, count: newProduct.count - 1 })
-			return { ...state, selectedItem: [...filterProducts] }
+			const index = state.selectedItem.findIndex((item) => item.id === id)
+			let newSelected = [...state.selectedItem]
+			newSelected[index] = { ...newSelected[index], count: newSelected[index].count - 1 }
+			return { ...state, selectedItem: newSelected, total: totalProducts(newSelected) }
 		}
 
 		case actions.ADD_PRODUCT: {
 			const product = action.payload
-			return { ...state, selectedItem: [...state.selectedItem, { ...product, count: 1 }] }
+			const newSelected = [...state.selectedItem, { ...product, count: 1 }]
+			return { ...state, selectedItem: newSelected, total: totalProducts(newSelected) }
 		}
 
 		case actions.REMOVE_PRODUCT: {
 			const { selectedItem } = state
 			const id = action.payload
 			const filterSelectedItem = selectedItem.filter((item) => item.id !== id)
-			return { ...state, selectedItem: [...filterSelectedItem] }
+			return { ...state, selectedItem: [...filterSelectedItem], total: totalProducts(filterSelectedItem) }
 		}
 
 		case actions.PAYOFF: {
-			return { ...state, pay: true }
+			return { ...initialState, pay: true }
 		}
 
 		case actions.CLEAR: {
@@ -97,12 +99,13 @@ const value = (dispatch) => {
 	}
 }
 
-export const CardProvider = ({ children }) => {
+export const CartProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
+	const newDispatch = value(dispatch)
 
 	return (
-		<CardState.Provider value={state}>
-			<CardDispatch.Provider value={value(dispatch)}>{children}</CardDispatch.Provider>
-		</CardState.Provider>
+		<CartState.Provider value={state}>
+			<CartDispatch.Provider value={newDispatch}>{children}</CartDispatch.Provider>
+		</CartState.Provider>
 	)
 }

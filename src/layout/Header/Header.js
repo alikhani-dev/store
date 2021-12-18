@@ -3,9 +3,11 @@ import { MdOutlineShoppingCart } from 'react-icons/md'
 import { MdPersonOutline } from 'react-icons/md'
 import { BiHomeAlt } from 'react-icons/bi'
 import styles from './style.module.css'
-import { useCard } from '../../Context'
+import { useCart } from '../../Context'
 
 const Header = () => {
+	const { selectedItem } = useCart()
+	const { length } = selectedItem
 
 	return (
 		<header className={styles.header}>
@@ -17,9 +19,9 @@ const Header = () => {
 				<MdPersonOutline />
 				Login / Signup
 			</NavLink>
-			<NavLink className={styles.card} title='page card' to='card'>
+			<NavLink className={styles.cart} title='page cart' to='cart'>
 				<MdOutlineShoppingCart />
-				<span className={styles.badge}>0</span>
+				<span className={styles.badge}>{length}</span>
 			</NavLink>
 		</header>
 	)

@@ -1,24 +1,24 @@
 import { createContext, useReducer, useContext, useLayoutEffect } from 'react'
 import { get } from '../Service'
 
-const dataContext = createContext()
-const dataDispatch = createContext()
+const productsContext = createContext()
+const productsDispatch = createContext()
 
-export const useDataDispatch = () => {
-	const context = useContext(dataDispatch)
+export const useProductsDispatch = () => {
+	const context = useContext(productsDispatch)
 
 	if (!context) {
-		throw new Error('dataDispatch must be used with a Provider')
+		throw new Error('productsDispatch must be used with a Provider')
 	}
 
 	return context
 }
 
-export const useData = () => {
-	const context = useContext(dataContext)
+export const useProducts = () => {
+	const context = useContext(productsContext)
 
-    if (!context) {
-		throw new Error('dataContext must be used with a Provider')
+	if (!context) {
+		throw new Error('productsContext must be used with a Provider')
 	}
 
 	return context
@@ -37,8 +37,8 @@ const initialState = {
 
 const value = (dispatch) => {
 	return {
-		filedRequestProducts: (payload) => dispatch({ type: actions.FAILED_REQUEST_PRODUCTS, payload }),
-		successRequestProducts: (payload) => dispatch({ type: actions.SUCCESS_REQUEST_PRODUCTS, payload }),
+		filedRequest: (payload) => dispatch({ type: actions.FAILED_REQUEST_PRODUCTS, payload }),
+		successRequest: (payload) => dispatch({ type: actions.SUCCESS_REQUEST_PRODUCTS, payload }),
 	}
 }
 
@@ -59,14 +59,14 @@ export const ProductsProvider = ({ children }) => {
 	const newDispatch = value(dispatch)
 
 	useLayoutEffect(() => {
-		get(`v1/f81a2815-e9bd-4fc8-83d7-bfe5f9411145`)
-			.then(({ data }) => newDispatch.successRequestProducts(data))
-			.catch((e) => newDispatch.filedRequestProducts(e))
+		get(`v1/426566c7-b709-4395-b0da-d6c8c425f29d`)
+			.then(({ data }) => newDispatch.successRequest(data))
+			.catch((e) => newDispatch.filedRequest(e))
 	}, [])
 
 	return (
-		<dataContext.Provider value={state}>
-			<dataDispatch.Provider value={newDispatch}>{children}</dataDispatch.Provider>
-		</dataContext.Provider>
+		<productsContext.Provider value={state}>
+			<productsDispatch.Provider value={newDispatch}>{children}</productsDispatch.Provider>
+		</productsContext.Provider>
 	)
 }

@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom'
 import styles from './style.module.css'
-import { checkExist } from '../../helper'
-import { useCard, useCardDispatch } from '../../Context'
+import { checkExist, countProduct } from '../../Helper'
+import { useCart, useCartDispatch } from '../../Context'
+import { BsTrash } from 'react-icons/bs'
+import {AiOutlinePlusCircle,AiOutlineMinusCircle} from 'react-icons/ai'
 
 const Product = ({ data }) => {
-	const { selectedItem } = useCard()
-	const { incrementProduct, decrementProduct, addProduct } = useCardDispatch()
+	const { incrementProduct, decrementProduct, addProduct, removeProduct } = useCartDispatch()
+	const { selectedItem } = useCart()
 	const { id, title, image } = data
 	const status = checkExist(selectedItem, id)
+	const count = countProduct(selectedItem, id)
+
 	return (
-		<div className={styles.card}>
+		<div className={styles.cart}>
 			<div className={styles.wrapperImg}>
 				<Link to={`product/${id}`} className={styles.link}>
 					<img className={styles.img} alt={`image ` + title} src={image} />
@@ -17,12 +21,11 @@ const Product = ({ data }) => {
 			</div>
 			<h3 className={styles.title}>{title}</h3>
 			<div>
-				{status ? (
-					<button onClick={() => incrementProduct(id)}>+</button>
-				) : (
-					<button onClick={() => addProduct(data)}>add Card</button>
-				)}
-				{status && <button onClick={() => decrementProduct(id)}>-</button>}
+				{status ? 
+				<button onClick={() => incrementProduct(id)}><AiOutlinePlusCircle/></button> : 
+				<button onClick={() => addProduct(data)}>add Cart</button> }
+				{count === 1 && <button onClick={() => removeProduct(id)}><BsTrash/></button>}
+				{count > 1 && <button onClick={() => decrementProduct(id)}><AiOutlineMinusCircle/></button>}
 			</div>
 		</div>
 	)

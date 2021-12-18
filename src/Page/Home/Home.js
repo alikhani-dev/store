@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import Loader from '../../Components/Loader'
-import { useData } from '../../Context'
+import { useProducts } from '../../Context'
 import Main from '../../Layout/Main'
 import Product from '../../Components/Product'
 
 const Home = () => {
 	const [items, setItems] = useState()
-	const { loading, products } = useData()
+	const { loading, products } = useProducts()
 
 	useEffect(() => {
 		if (products) {
