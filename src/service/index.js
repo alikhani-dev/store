@@ -1,21 +1,23 @@
 import axios from 'axios'
 
 const instance = axios.create({
-	baseURL: 'https://mocki.io/',
+	baseURL: process.env.REACT_APP_BASE_URL_PRODUCTS,
 })
 
-export const get = async (url, config) => {
+const get = async (url, config) => {
 	return await instance.get(url, config && config)
 }
 
-export const remove = async (url, config) => {
+const remove = async (url, config) => {
 	return await instance.delete(url, config && config)
 }
 
-export const post = async (url, data, config) => {
+const post = async (url, data, config) => {
 	return await instance.post(url, data && data, config && config)
 }
 
-export const put = async (url, data, config) => {
+const put = async (url, data, config) => {
 	return await instance.put(url, data && data, config && config)
 }
+
+export { get, remove, post, put }

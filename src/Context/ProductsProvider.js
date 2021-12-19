@@ -59,7 +59,7 @@ export const ProductsProvider = ({ children }) => {
 	const newDispatch = value(dispatch)
 
 	useLayoutEffect(() => {
-		get(`v1/426566c7-b709-4395-b0da-d6c8c425f29d`)
+		get(process.env.REACT_APP_URL_CATEGORY_PRODUCTS)
 			.then(({ data }) => newDispatch.successRequest(data))
 			.catch((e) => newDispatch.filedRequest(e))
 	}, [])

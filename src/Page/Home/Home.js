@@ -1,20 +1,11 @@
-import { useEffect, useState } from 'react'
-import Loader from '../../Components/Loader'
 import { useProducts } from '../../Context'
-import Main from '../../Layout/Main'
-import Product from '../../Components/Product'
+import { Main } from '../../Layout'
+import { Products as ListProduct } from '../../Components'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Home = () => {
-	const [items, setItems] = useState()
 	const { loading, products } = useProducts()
-
-	useEffect(() => {
-		if (products) {
-			setItems(products.map((product) => <Product key={product.id} data={product} />))
-		}
-	}, [products])
-
-	return loading ? <Loader /> : <Main>{items}</Main>
+	return <Main>{loading || !products ? <CircularProgress /> : <ListProduct products={products} />}</Main>
 }
 
 export default Home

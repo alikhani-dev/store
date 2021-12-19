@@ -2,7 +2,7 @@ const checkExist = (state, id) => {
 	return !!state.find((item) => item.id === id)
 }
 
-const countProduct = (state, id) => {
+const countProducts = (state, id) => {
 	const index = state.findIndex((item) => item.id === id)
 	if (index === -1) {
 		return 0
@@ -11,4 +11,4 @@ const countProduct = (state, id) => {
 	}
 }
 
-export { checkExist, countProduct }
+export { checkExist, countProducts }

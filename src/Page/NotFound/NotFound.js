@@ -1,5 +1,7 @@
+import { Main } from '../../Layout'
+
 const Notfound = () => {
-	return <>Notfound</>
+	return <Main>Notfound</Main>
 }
 
 export default Notfound
