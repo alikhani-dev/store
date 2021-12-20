@@ -11,4 +11,8 @@ const countProducts = (state, id) => {
 	}
 }
 
-export { checkExist, countProducts }
+const findProducts = (value, state) => {
+	return state.filter((item) => item.name.toLowerCase().startsWith(value.toLowerCase()))
+}
+
+export { checkExist, countProducts, findProducts }

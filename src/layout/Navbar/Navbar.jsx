@@ -1,5 +1,5 @@
 import { AppBar, Badge, IconButton, Toolbar, Typography } from '@mui/material'
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
+import { ShoppingCartOutlined } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import { useCart } from '../../Context'
 import useStyles from './Styles'
@@ -18,7 +18,7 @@ const Navbar = () => {
 				<IconButton color='inherit' edge='end'>
 					<Badge color='error' badgeContent={selectedItem.length}>
 						<Link to='cart'>
-							<ShoppingCartOutlinedIcon />
+							<ShoppingCartOutlined />
 						</Link>
 					</Badge>
 				</IconButton>

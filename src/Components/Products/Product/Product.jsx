@@ -1,10 +1,5 @@
-import { Card, Typography, CardContent, CardActions, IconButton, CardMedia, Box } from '@mui/material'
-import {
-	ShoppingCart,
-	AddCircleOutlineOutlined,
-	DeleteOutlineOutlined,
-	RemoveCircleOutlineOutlined,
-} from '@mui/icons-material'
+import { Card, Typography, CardContent, CardActions, IconButton, CardMedia } from '@mui/material'
+import { ShoppingCart, AddCircleOutlineOutlined, DeleteOutlineOutlined, RemoveCircleOutlineOutlined } from '@mui/icons-material'
 import { useCart, useCartDispatch } from '../../../Context'
 import { checkExist, countProducts } from '../../../Helper'
 import useStyles from './Styles'
@@ -23,7 +18,6 @@ const Product = ({ product }) => {
 			<Link to={`product/${id}`} className={styles.link} />
 			<CardMedia className={styles.media} image={image} title={name} />
 			<CardContent className={styles.content}>
-				<Box className={styles.status} />
 				<div>
 					<Typography variant='h6' gutterBottom>
 						{name}
@@ -38,24 +32,32 @@ const Product = ({ product }) => {
 					${price}
 				</Typography>
 				<div>
-					{countProduct > 1 && (
-						<IconButton onClick={() => decrementProduct(id)} aria-label='increment'>
-							<RemoveCircleOutlineOutlined />
-						</IconButton>
-					)}
-					{countProduct === 1 && (
-						<IconButton onClick={() => removeProduct(id)} aria-label='increment'>
-							<DeleteOutlineOutlined />
-						</IconButton>
-					)}
-					{!existProduct ? (
-						<IconButton onClick={() => addProduct(product)} aria-label='add to Cart'>
-							<ShoppingCart />
-						</IconButton>
+					{!status ? (
+							<IconButton disabled>
+								<ShoppingCart />
+							</IconButton>
 					) : (
-						<IconButton onClick={() => incrementProduct(id)} aria-label='increment'>
-							<AddCircleOutlineOutlined />
-						</IconButton>
+						<>
+							{countProduct > 1 && (
+								<IconButton onClick={() => decrementProduct(id)} aria-label='increment'>
+									<RemoveCircleOutlineOutlined />
+								</IconButton>
+							)}
+							{countProduct === 1 && (
+								<IconButton onClick={() => removeProduct(id)} aria-label='increment'>
+									<DeleteOutlineOutlined />
+								</IconButton>
+							)}
+							{!existProduct ? (
+								<IconButton onClick={() => addProduct(product)} aria-label='add to Cart'>
+									<ShoppingCart />
+								</IconButton>
+							) : (
+								<IconButton onClick={() => incrementProduct(id)} aria-label='increment'>
+									<AddCircleOutlineOutlined />
+								</IconButton>
+							)}
+						</>
 					)}
 				</div>
 			</CardActions>
