@@ -16,13 +16,13 @@ const Cart = () => {
 	)
 
 	return (
-		<Grid container justifyContent='space-evenly' spacing={4} columns={12} p={4}>
+		<Grid container justifyContent='flex-start' columns={12}>
 			<Grid item xs={12} mt={3}>
 				<Typography align='center' variant='h4'>
 					Your shopping Cart
 				</Typography>
 			</Grid>
-			{existProducts ? <CartEmpty /> : selectedItem.map((product) => <CartItem product={product} />)}
+			{existProducts ? <CartEmpty /> : selectedItem.map((product) => <CartItem key={product.id} product={product} />)}
 		</Grid>
 	)
 }

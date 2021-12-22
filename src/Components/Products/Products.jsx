@@ -1,21 +1,13 @@
-import { SearchOutlined } from '@mui/icons-material'
-import { Grid, IconButton, InputAdornment, TextField } from '@mui/material'
+import { Grid } from '@mui/material'
 import { useState } from 'react'
 import Product from './Product'
-
+import InputSearch from './InputSearch'
 const Products = ({ products }) => {
 	const [character, setCharacter] = useState()
 
 	return (
 		<Grid container justifyContent='space-evenly' spacing={4} columns={12} p={4}>
-			<Grid item xs={12} textAlign='center'>
-				<TextField
-					fullWidth
-					style={{ maxWidth: '700px' }}
-					onChange={({ target }) => setCharacter(target.value.toLowerCase())}
-					label='Search ....'
-				/>
-			</Grid>
+			<InputSearch setCharacter={setCharacter} />
 			{products
 				.filter((item) => (character ? item.name.toLowerCase().startsWith(character) : item))
 				.map((item) => (
