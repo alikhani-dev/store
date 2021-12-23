@@ -1,17 +1,16 @@
-import { Grid, CardMedia, CardContent, Typography, IconButton, Card } from '@mui/material'
-import { AddCircleOutlineOutlined, RemoveCircleOutlineOutlined, DeleteOutlineOutlined } from '@mui/icons-material'
+import { Grid, CardMedia, CardContent, Typography, Card } from '@mui/material'
 import { useCart, useCartDispatch } from '../../../Context'
 import { countProducts } from '../../../Helper'
 import useStyles from './Styles'
 import { Box } from '@mui/system'
+import Actions from './ItemActions'
+import { useCallback } from 'react'
 
 const Item = ({ product }) => {
 	const { selectedItem } = useCart()
 	const { image, name, price, id } = product
-	const { removeProduct, incrementProduct, decrementProduct } = useCartDispatch()
 	const countProduct = countProducts(selectedItem, id)
 	const styles = useStyles()
-
 	return (
 		<Grid item xs={12} md={6} lg={4}>
 			<Card className={styles.card}>
@@ -27,19 +26,7 @@ const Item = ({ product }) => {
 						</Typography>
 					</CardContent>
 					<Box className={styles.boxChild}>
-						{countProduct === 1 ? (
-							<IconButton aria-label='remove' onClick={() => removeProduct(id)}>
-								<DeleteOutlineOutlined />
-							</IconButton>
-						) : (
-							<IconButton aria-label='decrement' onClick={() => decrementProduct(id)}>
-								<RemoveCircleOutlineOutlined />
-							</IconButton>
-						)}
-						<Typography>{countProduct}</Typography>
-						<IconButton aria-label='increment' onClick={() => incrementProduct(id)}>
-							<AddCircleOutlineOutlined />
-						</IconButton>
+						<Actions countProduct={countProduct} id={id} dispatch={useCartDispatch} />
 					</Box>
 				</Box>
 			</Card>

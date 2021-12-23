@@ -2,6 +2,7 @@ import { Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useCart } from '../../Context'
 import CartItem from './Item'
+import PayOff from './PayOff'
 
 const Cart = () => {
 	const { selectedItem } = useCart()
@@ -23,6 +24,7 @@ const Cart = () => {
 				</Typography>
 			</Grid>
 			{existProducts ? <CartEmpty /> : selectedItem.map((product) => <CartItem key={product.id} product={product} />)}
+			{!existProducts && <PayOff />}
 		</Grid>
 	)
 }

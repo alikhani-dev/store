@@ -1,18 +1,11 @@
-import { Card, Typography, CardContent, CardActions, IconButton, CardMedia } from '@mui/material'
-import { ShoppingCart, AddCircleOutlineOutlined, DeleteOutlineOutlined, RemoveCircleOutlineOutlined } from '@mui/icons-material'
-import { useCart, useCartDispatch } from '../../../Context'
-import { checkExist, countProducts } from '../../../Helper'
-import useStyles from './Styles'
+import { Card, Typography, CardContent, CardMedia, CardActions } from '@mui/material'
 import { Link } from 'react-router-dom'
+import Actions from './ProductAction'
+import useStyles from './Styles'
 
 const Product = ({ product }) => {
-	const { addProduct, removeProduct, incrementProduct, decrementProduct } = useCartDispatch()
 	const { image, name, price, description, status, id } = product
-	const { selectedItem } = useCart()
-	const existProduct = checkExist(selectedItem, id)
-	const countProduct = countProducts(selectedItem, id)
 	const styles = useStyles(status)
-
 	return (
 		<Card className={styles.card}>
 			<Link to={`product/${id}`} className={styles.link} />
@@ -31,35 +24,7 @@ const Product = ({ product }) => {
 				<Typography variant='body2' m={2}>
 					${price}
 				</Typography>
-				<div>
-					{!status ? (
-							<IconButton disabled>
-								<ShoppingCart />
-							</IconButton>
-					) : (
-						<>
-							{countProduct > 1 && (
-								<IconButton onClick={() => decrementProduct(id)} aria-label='increment'>
-									<RemoveCircleOutlineOutlined />
-								</IconButton>
-							)}
-							{countProduct === 1 && (
-								<IconButton onClick={() => removeProduct(id)} aria-label='increment'>
-									<DeleteOutlineOutlined />
-								</IconButton>
-							)}
-							{!existProduct ? (
-								<IconButton onClick={() => addProduct(product)} aria-label='add to Cart'>
-									<ShoppingCart />
-								</IconButton>
-							) : (
-								<IconButton onClick={() => incrementProduct(id)} aria-label='increment'>
-									<AddCircleOutlineOutlined />
-								</IconButton>
-							)}
-						</>
-					)}
-				</div>
+				<Actions product={product} />
 			</CardActions>
 		</Card>
 	)
