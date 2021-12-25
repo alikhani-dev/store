@@ -62,6 +62,7 @@ export const ProductsProvider = ({ children }) => {
 		get(process.env.REACT_APP_URL_CATEGORY_PRODUCTS)
 			.then(({ data }) => newDispatch.successRequest(data))
 			.catch((e) => newDispatch.filedRequest(e))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (

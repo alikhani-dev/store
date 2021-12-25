@@ -1,13 +1,13 @@
 import { Button, ButtonGroup, Grid, Typography } from '@mui/material'
 import { AttachMoney, Clear } from '@mui/icons-material'
 import { useCart, useCartDispatch } from '../../Context'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const PayOff = () => {
-	const { total, pay } = useCart()
-	const {  clear } = useCartDispatch()
-	const navigate = useNavigate()
-    
+	const { total } = useCart()
+	const { clear } = useCartDispatch()
+	// const navigate = useNavigate()
+
 	return (
 		<>
 			<Grid item xs={12} p={4}>

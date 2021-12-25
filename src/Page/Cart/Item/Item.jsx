@@ -4,7 +4,6 @@ import { countProducts } from '../../../Helper'
 import useStyles from './Styles'
 import { Box } from '@mui/system'
 import Actions from './ItemActions'
-import { useCallback } from 'react'
 
 const Item = ({ product }) => {
 	const { selectedItem } = useCart()
