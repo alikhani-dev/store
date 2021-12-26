@@ -59,7 +59,7 @@ export const ProductsProvider = ({ children }) => {
 	const newDispatch = value(dispatch)
 
 	useLayoutEffect(() => {
-		get(process.env.REACT_APP_URL_CATEGORY_PRODUCTS)
+		get('products/.json')
 			.then(({ data }) => newDispatch.successRequest(data))
 			.catch((e) => newDispatch.filedRequest(e))
 		// eslint-disable-next-line react-hooks/exhaustive-deps

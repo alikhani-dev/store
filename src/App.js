@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './Layout'
 import { Home, NotFound, Cart, Product } from './Page'
-import { Login, Register } from './Auth'
+import { Login, Register } from './Authentication'
 
 const App = () => {
 	return (
