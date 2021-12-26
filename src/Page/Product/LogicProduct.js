@@ -11,7 +11,7 @@ const LogicProduct = () => {
 
 	useLayoutEffect(() => {
 		if (products) {
-			setItem(products.find((item) => item.id === Number(id)))
+			setItem(products.find((item) => item !== null && item.id === Number(id)))
 		}
 	}, [id, products])
 

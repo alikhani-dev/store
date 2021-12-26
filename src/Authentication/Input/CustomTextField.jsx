@@ -6,7 +6,7 @@ const CustomTextField = ({ error = false, control, ...other }) => {
 		<Controller
 			name={other.label}
 			control={control}
-			render={({ field }) => <TextField  helperText={error?.message} error={!!error} {...field} {...other} />}
+			render={({ field }) => <TextField helperText={error?.message} error={!!error} {...field} {...other} />}
 		/>
 	)
 }

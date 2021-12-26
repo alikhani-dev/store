@@ -1,8 +1,7 @@
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { schema } from './validation'
-import { Input } from './Input'
+import schema from './validation'
+import Input from './Input'
 import useStyles from './registerStyles'
 
 const Register = () => {
@@ -10,7 +9,7 @@ const Register = () => {
 		handleSubmit,
 		control,
 		formState: { errors },
-	} = useForm({ resolver: yupResolver(schema) })
+	} = useForm({ resolver: schema, mode: 'onBlur' })
 	const styles = useStyles()
 	const onSubmit = (data) => console.log(data)
 
@@ -21,14 +20,24 @@ const Register = () => {
 					Sing up
 				</Typography>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<Grid container spacing={1}>
-						<Grid item xs={12} sm mt={1}>
+					<Grid container spacing={2}>
+						<Grid item xs={12} sm>
 							<Input control={control} error={errors?.name} label='name' autoComplete='name' fullWidth />
 						</Grid>
-						<Grid item xs={12} sm mt={1}>
+						<Grid item xs={12} sm>
 							<Input control={control} error={errors?.lastName} label='lastName' fullWidth />
 						</Grid>
-						<Grid item xs={12} mt={1}>
+						<Grid item xs={12}>
+							<Input
+								control={control}
+								error={errors?.['phone Number']}
+								label='phone Number'
+								placeholder='09123456789'
+								autoComplete='phone'
+								fullWidth
+							/>
+						</Grid>
+						<Grid item xs={12}>
 							<Input
 								control={control}
 								error={errors?.email}
@@ -39,28 +48,27 @@ const Register = () => {
 								fullWidth
 							/>
 						</Grid>
-						<Grid item xs={12} mt={1}>
+						<Grid item xs={12}>
 							<Input
 								control={control}
-								error={errors?.['phone Number']}
-								label='phone Number'
-								placeholder='09123456789'
+								error={errors?.password}
+								label='password'
+								type='password'
 								fullWidth
+								autoComplete='new-password'
 							/>
 						</Grid>
-						<Grid item xs={12} mt={1}>
-							<Input control={control} error={errors?.password} label='password' type='password' fullWidth />
-						</Grid>
-						<Grid item xs={12} mt={1}>
+						<Grid item xs={12}>
 							<Input
 								control={control}
 								error={errors?.['confirm Password']}
 								label='confirm Password'
 								type='password'
 								fullWidth
+								autoComplete='new-password'
 							/>
 						</Grid>
-						<Grid item xs={12} mt={1}>
+						<Grid item xs={12}>
 							<Button variant='contained' color='primary' type='submit' fullWidth>
 								send
 							</Button>
