@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext, useLayoutEffect } from 'react'
-import { get } from '../Service'
+import { getProducts } from '../Service'
 
 const productsContext = createContext()
 const productsDispatch = createContext()
@@ -59,9 +59,10 @@ export const ProductsProvider = ({ children }) => {
 	const newDispatch = value(dispatch)
 
 	useLayoutEffect(() => {
-		get('products/.json')
-			.then(({ data }) => newDispatch.successRequest(data))
+		getProducts()
+			.then((data) => newDispatch.successRequest(data))
 			.catch((e) => newDispatch.filedRequest(e))
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 

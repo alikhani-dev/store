@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, Grid } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import Input from './Input'
-import schema from './validation'
+import { schema, defaultValues } from './validation'
 import useStyles from './LoginStyles'
 
 const Login = () => {
@@ -9,7 +9,7 @@ const Login = () => {
 		control,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({ resolver: schema })
+	} = useForm({ resolver: schema, defaultValues })
 	const styles = useStyles()
 	const onSubmit = (data) => console.log(data)
 

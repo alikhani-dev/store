@@ -1,17 +1,21 @@
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import schema from './validation'
+import { schema, defaultValues } from './validation'
 import Input from './Input'
 import useStyles from './registerStyles'
+import { createItem } from '../Service'
 
 const Register = () => {
 	const {
 		handleSubmit,
 		control,
 		formState: { errors },
-	} = useForm({ resolver: schema, mode: 'onBlur' })
+	} = useForm({ resolver: schema, mode: 'onBlur', defaultValues })
 	const styles = useStyles()
-	const onSubmit = (data) => console.log(data)
+
+	const onSubmit = (data) => {
+		createItem(data)
+	}
 
 	return (
 		<Card className={styles.wrapper}>

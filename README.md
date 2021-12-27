@@ -14,7 +14,7 @@
 
 ## Tech Stack
 
-**Client:** React, Material-UI , React Router DOM
+**Client:** React, Material-UI , React Router DOM ,React Hook Form , Yup
 
 **API:** Firebase
 

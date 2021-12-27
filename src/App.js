@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './Layout'
-import { Home, NotFound, Cart, Product } from './Page'
+import { Home, NotFound, Cart, Product, AddProduct } from './Page'
 import { Login, Register } from './Authentication'
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='cart' element={<Cart />} />
+				<Route path='addProduct' element={<AddProduct />} />
 				<Route path='product/:id' element={<Product />} />
 				<Route path='login' element={<Login />} />
 				<Route path='register' element={<Register />} />
