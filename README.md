@@ -7,9 +7,16 @@
 - [x] SPA (single page application)
 - [x] show detail product
 - [x] filter products
-- [x] Connect Api
+- [x] Connect Api ( Firebase )
 - [ ] Login & Sing up
 - [ ] completing component cart
+- [ ] Add product on API (server)
+
+## Tech Stack
+
+**Client:** React, Material-UI , React Router DOM
+
+**API:** Firebase
 
 ## Contact US
 
