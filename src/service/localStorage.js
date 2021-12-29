@@ -1,5 +1,4 @@
-const createItem = (data) => {
-	const id = generateID()
+const createItem = (id, data) => {
 	localStorage.setItem(id, JSON.stringify(data))
 }
 
@@ -21,4 +20,4 @@ const generateID = () => {
 	return index
 }
 
-export { createItem, getItem, removeItem }
+export { createItem, getItem, removeItem ,generateID}

@@ -2,6 +2,7 @@ import { Grid } from '@mui/material'
 import { useState } from 'react'
 import Product from './Product'
 import InputSearch from './InputSearch'
+
 const Products = ({ products }) => {
 	const [character, setCharacter] = useState()
 
@@ -11,7 +12,7 @@ const Products = ({ products }) => {
 			{products
 				.filter((item) => (character ? item.name.toLowerCase().startsWith(character) : item))
 				.map((item) => (
-					<Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
+					<Grid item key={item.key} xs={12} sm={6} md={4} lg={3}>
 						<Product product={item} />
 					</Grid>
 				))}

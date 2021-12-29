@@ -3,19 +3,18 @@ import { Button, Grid, Card, CardContent, InputAdornment } from '@mui/material'
 import { AttachMoney, AddLink, Category, Key, ProductionQuantityLimits } from '@mui/icons-material'
 import { useForm } from 'react-hook-form'
 import { creatProduct } from '../../Service'
-import { Input, Select } from './CustomInput'
+import { Input, Select } from './ItemForm'
+import { Toast } from '../../Components'
 import { getCategory } from '../../Service'
 import { schema, defaultValues } from './validation'
 import useStyles from './style'
 
 const Dashboard = () => {
-	const [category, setCategory] = useState([])
+	const [open, setOpen] = useState(false)
+	const [category, setCategory] = useState([{ value: 'please wait ...', key: 3 }])
 	const styles = useStyles()
 	const { formState: { errors }, control, handleSubmit, reset } = useForm({ resolver: schema, defaultValues })
-	const status = [
-		{ value: true, key: '1', text: 'not exist' },
-		{ value: false, key: '2', text: 'exist' },
-	]
+	const status = [ { value: true, key: '1', text: 'not exist' },{ value: false, key: '2', text: 'exist' }]
 
 	useLayoutEffect(() => {
 		getCategory()
@@ -23,11 +22,28 @@ const Dashboard = () => {
 			.catch(() => setCategory([{ value: 'Error server', key: 1 }]))
 	}, [])
 
-    const onSubmit = (data) => creatProduct(data)
+	const handelClose = (e, reason) => {
+		if (reason === 'clickaway') {
+            return
+        }
+        
+		setOpen(false)
+	}
 
+	const onSubmit = (data) => {
+		creatProduct(data)
+		setOpen(true)
+		reset()
+	}
 
 	return (
 		<Card className={styles.wrapper}>
+			<Toast
+				open={open}
+				onClose={handelClose}
+				autoHideDuration={5000}
+				message={'The information was successfully sent to the server'}
+			/>
 			<CardContent>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Grid container spacing={2}>

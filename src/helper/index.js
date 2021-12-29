@@ -1,8 +1,8 @@
-const checkExist = (state, id) => {
+export const checkExist = (state, id) => {
 	return !!state.find((item) => item.id === id)
 }
 
-const countProducts = (state, id) => {
+export const countProducts = (state, id) => {
 	const index = state.findIndex((item) => item.id === id)
 	if (index === -1) {
 		return 0
@@ -11,8 +11,6 @@ const countProducts = (state, id) => {
 	}
 }
 
-const findProducts = (value, state) => {
+export const findProducts = (value, state) => {
 	return state.filter((item) => item.name.toLowerCase().startsWith(value.toLowerCase()))
 }
-
-export { checkExist, countProducts, findProducts }
