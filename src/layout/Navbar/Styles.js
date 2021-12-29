@@ -8,10 +8,7 @@ const useStyles = makeStyles({
 	toolbar: {
 		justifyContent: 'space-between',
 		padding: '0 25px !important',
-	},
-	wrapperForm: {
-		margin: ' 0 10px 0 auto',
-	},
+	}
 })
 
 export default useStyles

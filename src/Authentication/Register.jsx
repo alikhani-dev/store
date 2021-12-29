@@ -1,20 +1,25 @@
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { schema, defaultValues } from './validation'
+import { useAuth } from '../Context'
 import Input from './Input'
 import useStyles from './registerStyles'
-import { createItem } from '../Service'
 
 const Register = () => {
-	const {
-		handleSubmit,
-		control,
-		formState: { errors },
-	} = useForm({ resolver: schema, mode: 'onBlur', defaultValues })
+	const { singUp } = useAuth()
+	const navigate = useNavigate()
+	const { handleSubmit, control, formState: { errors } } = useForm({ resolver: schema, defaultValues })
 	const styles = useStyles()
 
-	const onSubmit = (data) => {
-		createItem(data)
+	const onSubmit = async (data) => {
+		try {
+			await singUp(data.email, data.password)
+			navigate('/')
+		} catch (e) {
+			console.log(e)
+            // TODO
+		}
 	}
 
 	return (

@@ -1,18 +1,36 @@
 import { Button, Card, CardContent, Grid } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import Input from './Input'
 import { schema, defaultValues } from './validation'
+import { useAuth } from '../Context'
+import Input from './Input'
 import useStyles from './LoginStyles'
 
 const Login = () => {
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({ resolver: schema, defaultValues })
+	const { login, googleSingIn } = useAuth()
+	const navigate = useNavigate()
+	const { control, handleSubmit, formState: { errors } } = useForm({ resolver: schema, defaultValues })
 	const styles = useStyles()
-	const onSubmit = (data) => console.log(data)
 
+	const onSubmit = async ({password,email}) => {
+		try {
+            await login(password,email)
+            navigate('/')
+		} catch (e) {
+			console.log(e)
+            // TODO
+		}
+	}
+
+	const handelGoogleSingIn = async () => {
+		try {
+			await googleSingIn()
+			navigate('/')
+		} catch (e) {
+			console.log(e)
+            // TODO
+		}
+	}
 	return (
 		<Card className={styles.wrapper}>
 			<CardContent>
@@ -42,6 +60,11 @@ const Login = () => {
 						<Grid item xs={12}>
 							<Button variant='contained' fullWidth type='submit'>
 								Login
+							</Button>
+						</Grid>
+						<Grid item xs={12}>
+							<Button variant='contained' fullWidth onClick={handelGoogleSingIn}>
+								google
 							</Button>
 						</Grid>
 					</Grid>
