@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
-import { collection, getDocs, addDoc } from 'firebase/firestore'
+import { collection, getDocs, addDoc, setDoc, doc } from 'firebase/firestore'
 import { db, auth } from './firebase-config'
 //? ----------- Authenticated
 
@@ -8,8 +8,14 @@ export const googleSingIn = () => {
 	return signInWithPopup(auth, googleAuthProvider)
 }
 
-export const singUp = (email, password) => createUserWithEmailAndPassword(auth, email, password)
+export const singUp = ({ email, password, name, lastName, 'phone Number': phone }) => {
+	return createUserWithEmailAndPassword(auth, email, password).then(({ user }) =>
+		setDoc(doc(db, 'users', user.uid), { name, lastName, phone }),
+	)
+}
+
 export const login = (email, password) => signInWithEmailAndPassword(auth, email, password)
+
 export const logOut = () => signOut(auth)
 
 //? ----------- Database

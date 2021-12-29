@@ -2,9 +2,9 @@ import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { schema, defaultValues } from './validation'
-import { useAuth } from '../Context'
-import Input from './Input'
-import useStyles from './registerStyles'
+import { useAuth } from '../../Context'
+import Input from '../Input'
+import useStyles from './Style'
 
 const Register = () => {
 	const { singUp } = useAuth()
@@ -14,11 +14,11 @@ const Register = () => {
 
 	const onSubmit = async (data) => {
 		try {
-			await singUp(data.email, data.password)
+			await singUp(data)
 			navigate('/')
 		} catch (e) {
 			console.log(e)
-            // TODO
+			// TODO
 		}
 	}
 
