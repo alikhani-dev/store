@@ -1,40 +1,54 @@
+import { useState } from 'react'
 import { Button, Card, CardContent, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { schema, defaultValues } from './validation'
 import { useAuth } from '../../Context'
-import Input from '../Input'
+import { Toast } from '../../Components'
+import Input from '../FormTools'
 import useStyles from './Style'
 
 const Login = () => {
-	const { login , googleSingIn } = useAuth()
+	const [open, setOpen] = useState(false)
+	const [error, setError] = useState(null)
+	const { login, googleSingIn } = useAuth()
 	const navigate = useNavigate()
-	const { control, handleSubmit, formState: { errors } } = useForm({ resolver: schema, defaultValues })
-	const styles = useStyles()
+    const styles = useStyles()
 
-    const onSubmit = async ({email,password})=>{
-        try {
-			await login(email,password)
-			navigate('/')
-		} catch (e) {
-			console.log(e)
-            // TODO
+	const { control, handleSubmit, formState: { errors } } = useForm({ resolver: schema, defaultValues })
+
+	const handelClose = (e, reason) => {
+		if (reason === 'clickaway') {
+			return
 		}
-    }
+
+		setOpen(false)
+	}
+
+	const onSubmit = async ({ email, password }) => {
+		try {
+			await login(email, password)
+			navigate('/')
+		} catch ({ code }) {
+			setError(code)
+			setOpen(true)
+		}
+	}
 
 	const handelGoogleSingIn = async () => {
 		try {
 			await googleSingIn()
 			navigate('/')
-		} catch (e) {
-			console.log(e)
-            // TODO
+		} catch ({ code }) {
+			setError(code)
+			setOpen(true)
 		}
 	}
 	return (
 		<Card className={styles.wrapper}>
+			<Toast title='Error' type='error' open={open} message={error} onClose={handelClose} autoHideDuration={5000} />
 			<CardContent>
-				<form onSubmit={handleSubmit(onSubmit)} >
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<Grid container rowSpacing={3}>
 						<Grid item xs={12}>
 							<Input

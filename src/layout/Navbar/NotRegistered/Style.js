@@ -18,6 +18,11 @@ const useStyles = makeStyles({
 		padding: '6px 14px !important',
 		marginRight: '5px',
 	},
+	link: {
+		position: 'absolute',
+		width: '100%',
+		height: '100%',
+	},
 })
 
 export default useStyles

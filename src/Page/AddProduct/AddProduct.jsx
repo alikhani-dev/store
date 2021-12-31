@@ -14,7 +14,10 @@ const Dashboard = () => {
 	const [category, setCategory] = useState([{ value: 'please wait ...', key: 3 }])
 	const styles = useStyles()
 	const { formState: { errors }, control, handleSubmit, reset } = useForm({ resolver: schema, defaultValues })
-	const status = [ { value: true, key: '1', text: 'not exist' },{ value: false, key: '2', text: 'exist' }]
+	const status = [
+		{ value: true, key: '1', text: 'not exist' },
+		{ value: false, key: '2', text: 'exist' },
+	]
 
 	useLayoutEffect(() => {
 		getCategory()
@@ -24,9 +27,9 @@ const Dashboard = () => {
 
 	const handelClose = (e, reason) => {
 		if (reason === 'clickaway') {
-            return
-        }
-        
+			return
+		}
+
 		setOpen(false)
 	}
 
@@ -39,6 +42,8 @@ const Dashboard = () => {
 	return (
 		<Card className={styles.wrapper}>
 			<Toast
+                title='Success'
+				type='success'
 				open={open}
 				onClose={handelClose}
 				autoHideDuration={5000}

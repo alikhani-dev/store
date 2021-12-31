@@ -5,14 +5,16 @@
 ## Features
 
 - [x] SPA (single page application)
+- [x] Responsive Design
 - [x] Show Product details
 - [x] Product Filters
 - [x] Get product ( Firebase )
 - [x] Add product ( Firebase )
 - [x] Sing up with gmail ( Firebase )
 - [x] Login with google account & email ( Firebase )
+- [x] Save User Information on server
+- [ ] Save Selected Product on server
 - [ ] Completing component cart
-- [ ] Save Selected Product on google account & email 
 
 ## Tech Stack
 

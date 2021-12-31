@@ -1,6 +1,6 @@
-import { Snackbar, Alert } from '@mui/material'
+import { Snackbar, Alert, AlertTitle } from '@mui/material'
 
-const Toast = ({ message, ...other }) => {
+const Toast = ({ type, message, title, ...other }) => {
 	return (
 		<Snackbar
 			{...other}
@@ -9,7 +9,8 @@ const Toast = ({ message, ...other }) => {
 				horizontal: 'right',
 			}}
 		>
-			<Alert variant='filled' severity='success' sx={{ width: '100%' }}>
+			<Alert variant='filled' severity={type} sx={{ width: '100%' }}>
+				{title && <AlertTitle>{title}</AlertTitle>}
 				{message}
 			</Alert>
 		</Snackbar>

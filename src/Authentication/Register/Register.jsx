@@ -1,29 +1,42 @@
+import { useState } from 'react'
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { schema, defaultValues } from './validation'
+import { Toast } from '../../Components'
 import { useAuth } from '../../Context'
-import Input from '../Input'
+import Input from '../FormTools'
 import useStyles from './Style'
 
 const Register = () => {
+	const [open, setOpen] = useState(false)
+	const [error, setError] = useState(null)
 	const { singUp } = useAuth()
 	const navigate = useNavigate()
 	const { handleSubmit, control, formState: { errors } } = useForm({ resolver: schema, defaultValues })
 	const styles = useStyles()
 
+	const handelClose = (e, reason) => {
+		if (reason === 'clickaway') {
+			return
+		}
+
+		setOpen(false)
+	}
+
 	const onSubmit = async (data) => {
 		try {
 			await singUp(data)
 			navigate('/')
-		} catch (e) {
-			console.log(e)
-			// TODO
+		} catch ({ code }) {
+			setError(code)
+			setOpen(true)
 		}
 	}
 
 	return (
 		<Card className={styles.wrapper}>
+			<Toast title='Error' type='error' open={open} message={error} onClose={handelClose} autoHideDuration={5000} />
 			<CardContent>
 				<Typography variant='h4' component='h1' paragraph>
 					Sing up
