@@ -6,6 +6,7 @@ import useStyles from './Styles'
 const Product = ({ product }) => {
 	const { image, name, price, description, status, id } = product
 	const styles = useStyles(status)
+
 	return (
 		<Card className={styles.card}>
 			<Link to={`product/${id}`} className={styles.link} />

@@ -4,14 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 const validation = yup
 	.object()
 	.shape({
-		name: yup
-			.string()
-			.required('name is a required')
-			.matches(/^[a-zA-Z]+$/, 'Use only the letters of the English alphabet'),
-		lastName: yup
-			.string()
-			.required('lastName is a required')
-			.matches(/^[a-zA-Z]+$/, 'Use only the letters of the English alphabet'),
+		name: yup.string().required('name is a required'),
+		lastName: yup.string().required('lastName is a required'),
 		'phone Number': yup
 			.string()
 			.trim()

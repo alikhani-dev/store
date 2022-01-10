@@ -24,12 +24,12 @@ const ProductAction = ({ product }) => {
 			) : (
 				<>
 					{countProduct > 1 && (
-						<IconButton onClick={() => decrementProduct(id)} aria-label='increment'>
+						<IconButton onClick={() => decrementProduct(id)} aria-label='decrement Product'>
 							<RemoveCircleOutlineOutlined />
 						</IconButton>
 					)}
 					{countProduct === 1 && (
-						<IconButton onClick={() => removeProduct(id)} aria-label='increment'>
+						<IconButton onClick={() => removeProduct(id)} aria-label='remove Product'>
 							<DeleteOutlineOutlined />
 						</IconButton>
 					)}
@@ -38,7 +38,7 @@ const ProductAction = ({ product }) => {
 							<ShoppingCart />
 						</IconButton>
 					) : (
-						<IconButton onClick={() => incrementProduct(id)} aria-label='increment'>
+						<IconButton onClick={() => incrementProduct(id)} aria-label='increment Product'>
 							<AddCircleOutlineOutlined />
 						</IconButton>
 					)}

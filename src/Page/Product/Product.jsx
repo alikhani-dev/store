@@ -10,10 +10,10 @@ const Product = ({ product }) => {
 			<Button className={styles.button} onClick={() => navigate(-1)} variant='outlined'>
 				Go Back
 			</Button>
-			<Grid container justifyContent='center' xs={12} md>
+			<Grid item textAlign='center' xs={12} md>
 				<img src={image} alt={name} />
 			</Grid>
-			<Grid container flexDirection='column' justifyContent='center' xs={12} md>
+			<Grid item xs={12} md>
 				<Typography variant='h2' gutterBottom>
 					{name}
 				</Typography>
