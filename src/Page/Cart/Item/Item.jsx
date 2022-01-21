@@ -1,12 +1,12 @@
 import { Grid, CardMedia, CardContent, Typography, Card } from '@mui/material'
-import { useCart, useCartDispatch } from '../../../Context'
+import { useCart } from '../../../Context'
 import { countProducts } from '../../../Helper'
 import useStyles from './Styles'
 import { Box } from '@mui/system'
 import Actions from './ItemActions'
 
 const Item = ({ product }) => {
-	const { selectedItem } = useCart()
+	const { selectedItem } = useCart().state
 	const { image, name, price, id } = product
 	const countProduct = countProducts(selectedItem, id)
 	const styles = useStyles()
@@ -25,7 +25,7 @@ const Item = ({ product }) => {
 						</Typography>
 					</CardContent>
 					<Box className={styles.boxChild}>
-						<Actions countProduct={countProduct} id={id} dispatch={useCartDispatch} />
+						<Actions countProduct={countProduct} id={id}/>
 					</Box>
 				</Box>
 			</Card>

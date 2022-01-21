@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import { createContext, useContext, useLayoutEffect, useState } from 'react'
-import { googleSingIn, singUp, login, logOut, auth } from '../Service'
+import { googleSingIn, singUp, login, logOut, auth, updateProductUser } from '../Service'
 
 const AuthState = createContext()
 
@@ -20,5 +20,9 @@ export const AuthProvider = ({ children }) => {
 		return () => unsubscribe()
 	}, [])
 
-	return <AuthState.Provider value={{ googleSingIn, singUp, login, logOut, user }}>{children}</AuthState.Provider>
+	return (
+		<AuthState.Provider value={{ googleSingIn, singUp, login, logOut, updateProductUser, user }}>
+			{children}
+		</AuthState.Provider>
+	)
 }

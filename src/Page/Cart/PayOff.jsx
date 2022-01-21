@@ -1,11 +1,11 @@
 import { Button, ButtonGroup, Grid, Typography } from '@mui/material'
 import { AttachMoney, Clear } from '@mui/icons-material'
-import { useCart, useCartDispatch } from '../../Context'
+import { useCart } from '../../Context'
 // import { useNavigate } from 'react-router-dom'
 
 const PayOff = () => {
-	const { total } = useCart()
-	const { clear } = useCartDispatch()
+	const { total } = useCart().state
+	const { clear } = useCart().dispatch
 	// const navigate = useNavigate()
 
 	return (

@@ -35,12 +35,8 @@ const initialState = {
 	isError: '',
 }
 
-const value = (dispatch) => {
-	return {
-		filedRequest: (payload) => dispatch({ type: actions.FAILED_REQUEST_PRODUCTS, payload }),
-		successRequest: (payload) => dispatch({ type: actions.SUCCESS_REQUEST_PRODUCTS, payload }),
-	}
-}
+const filedRequest = (payload) => ({ type: actions.FAILED_REQUEST_PRODUCTS, payload })
+const successRequest = (payload) => ({ type: actions.SUCCESS_REQUEST_PRODUCTS, payload })
 
 const reducer = (state, action) => {
 	const { type } = action
@@ -56,19 +52,17 @@ const reducer = (state, action) => {
 
 export const ProductsProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const newDispatch = value(dispatch)
 
 	useLayoutEffect(() => {
 		getProducts()
-			.then((data) => newDispatch.successRequest(data))
-			.catch((e) => newDispatch.filedRequest(e))
-
+			.then((data) => dispatch(successRequest(data)))
+			.catch((e) => dispatch(filedRequest(e)))
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (
 		<productsContext.Provider value={state}>
-			<productsDispatch.Provider value={newDispatch}>{children}</productsDispatch.Provider>
+			<productsDispatch.Provider value={dispatch}>{children}</productsDispatch.Provider>
 		</productsContext.Provider>
 	)
 }

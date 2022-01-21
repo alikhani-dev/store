@@ -8,10 +8,10 @@ import useStyles from './Styles'
 
 const Navbar = () => {
 	const styles = useStyles()
-	const { selectedItem } = useCart()
+	const { selectedItem } = useCart().state
 	const { user } = useAuth()
 
-    return (
+	return (
 		<AppBar className={styles.appBar} position='sticky'>
 			<Toolbar className={styles.toolbar}>
 				<IconButton aria-label='logo' color='inherit' edge='start'>

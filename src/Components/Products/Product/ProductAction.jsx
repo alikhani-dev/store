@@ -4,13 +4,13 @@ import {
 	DeleteOutlineOutlined,
 	RemoveCircleOutlineOutlined,
 } from '@mui/icons-material'
-import { useCart, useCartDispatch } from '../../../Context'
-import { checkExist, countProducts } from '../../../Helper'
 import { IconButton } from '@mui/material'
-
+import { useCart } from '../../../Context'
+import { addProduct, decrementProduct, incrementProduct, removeProduct } from '../../../Context/CartProvider'
+import { checkExist, countProducts } from '../../../Helper'
 const ProductAction = ({ product }) => {
-	const { addProduct, removeProduct, incrementProduct, decrementProduct } = useCartDispatch()
-	const { selectedItem } = useCart()
+	const dispatch = useCart().dispatch
+	const { selectedItem } = useCart().state
 	const { id, status } = product
 	const countProduct = countProducts(selectedItem, id)
 	const existProduct = checkExist(selectedItem, id)
@@ -24,21 +24,21 @@ const ProductAction = ({ product }) => {
 			) : (
 				<>
 					{countProduct > 1 && (
-						<IconButton onClick={() => decrementProduct(id)} aria-label='decrement Product'>
+						<IconButton onClick={() => dispatch(decrementProduct(id))} aria-label='decrement Product'>
 							<RemoveCircleOutlineOutlined />
 						</IconButton>
 					)}
 					{countProduct === 1 && (
-						<IconButton onClick={() => removeProduct(id)} aria-label='remove Product'>
+						<IconButton onClick={() => dispatch(removeProduct(id))} aria-label='remove Product'>
 							<DeleteOutlineOutlined />
 						</IconButton>
 					)}
 					{!existProduct ? (
-						<IconButton onClick={() => addProduct(product)} aria-label='add to Cart'>
+						<IconButton onClick={() => dispatch(addProduct(product))} aria-label='add to Cart'>
 							<ShoppingCart />
 						</IconButton>
 					) : (
-						<IconButton onClick={() => incrementProduct(id)} aria-label='increment Product'>
+						<IconButton onClick={() => dispatch(incrementProduct(id))} aria-label='increment Product'>
 							<AddCircleOutlineOutlined />
 						</IconButton>
 					)}
