@@ -5,7 +5,9 @@ import CartItem from './Item'
 import PayOff from './PayOff'
 
 const Cart = () => {
-	const { selectedItem } = useCart().state
+	const {
+		state: { selectedItem },
+	} = useCart()
 	const existProducts = !selectedItem.length
 
 	const CartEmpty = () => (

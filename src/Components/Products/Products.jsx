@@ -7,7 +7,7 @@ const Products = ({ products }) => {
 	const [character, setCharacter] = useState()
 
 	return (
-		<Grid container justifyContent='space-evenly' spacing={4} p={4}>
+		<>
 			<InputSearch setCharacter={setCharacter} />
 			{products
 				.filter((item) => (character ? item.name.toLowerCase().startsWith(character) : item))
@@ -16,7 +16,7 @@ const Products = ({ products }) => {
 						<Product product={item} />
 					</Grid>
 				))}
-		</Grid>
+		</>
 	)
 }
 

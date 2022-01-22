@@ -13,9 +13,13 @@ const Login = () => {
 	const [error, setError] = useState(null)
 	const { login, googleSingIn } = useAuth()
 	const navigate = useNavigate()
-    const styles = useStyles()
+	const styles = useStyles()
 
-	const { control, handleSubmit, formState: { errors } } = useForm({ resolver: schema, defaultValues })
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({ resolver: schema, defaultValues })
 
 	const handelClose = (e, reason) => {
 		if (reason === 'clickaway') {

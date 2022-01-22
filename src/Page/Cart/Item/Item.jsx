@@ -6,7 +6,7 @@ import { Box } from '@mui/system'
 import Actions from './ItemActions'
 
 const Item = ({ product }) => {
-	const { selectedItem } = useCart().state
+	const { state:{selectedItem} } = useCart()
 	const { image, name, price, id } = product
 	const countProduct = countProducts(selectedItem, id)
 	const styles = useStyles()
