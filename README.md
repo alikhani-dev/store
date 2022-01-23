@@ -7,7 +7,8 @@
 - [x] SPA (single page application)
 - [x] Responsive Design
 - [x] Show Product details
-- [x] Product Filters
+- [x] Product Filters by category
+- [x] Product Filters by search
 - [x] Get product ( Firebase )
 - [x] Add product ( Firebase )
 - [x] Sing up with gmail ( Firebase )
