@@ -1,9 +1,14 @@
 import { createContext, useReducer, useContext } from 'react'
+import { totalProducts } from '../Helper'
 
 const CardContext = createContext()
 
 export const useCart = () => {
 	const context = useContext(CardContext)
+
+    if (!context) {
+		throw new Error('useCart must be used with a Provider')
+	}
 
 	return context
 }
@@ -21,10 +26,6 @@ const initialState = {
 	total: 0,
 	pay: false,
 	selectedItem: [],
-}
-
-const totalProducts = (arr) => {
-	return arr.reduce((total, product) => total + product.price * product.count, 0)
 }
 
 const reducer = (state, action) => {

@@ -14,3 +14,7 @@ export const countProducts = (state, id) => {
 export const findProducts = (value, state) => {
 	return state.filter((item) => item.name.toLowerCase().startsWith(value.toLowerCase()))
 }
+
+export const totalProducts = (arr) => {
+	return arr.reduce((total, product) => total + product.price * product.count, 0)
+}

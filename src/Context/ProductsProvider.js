@@ -24,7 +24,7 @@ export const useProducts = () => {
 	return context
 }
 //--- Reducer
-const actions = {
+const types = {
 	SUCCESS_REQUEST_PRODUCTS: 'SUCCESS_REQUEST_PRODUCTS',
 	FAILED_REQUEST_PRODUCTS: 'FAILED_REQUEST_PRODUCTS',
 }
@@ -35,15 +35,15 @@ const initialState = {
 	isError: '',
 }
 
-const filedRequest = (payload) => ({ type: actions.FAILED_REQUEST_PRODUCTS, payload })
-const successRequest = (payload) => ({ type: actions.SUCCESS_REQUEST_PRODUCTS, payload })
+const filedRequest = (payload) => ({ type: types.FAILED_REQUEST_PRODUCTS, payload })
+const successRequest = (payload) => ({ type: types.SUCCESS_REQUEST_PRODUCTS, payload })
 
 const reducer = (state, action) => {
 	const { type } = action
 	switch (type) {
-		case actions.SUCCESS_REQUEST_PRODUCTS:
+		case types.SUCCESS_REQUEST_PRODUCTS:
 			return { ...state, loading: false, products: action.payload, isError: '' }
-		case actions.FAILED_REQUEST_PRODUCTS:
+		case types.FAILED_REQUEST_PRODUCTS:
 			return { ...state, loading: false, products: [], isError: action.payload }
 		default:
 			throw new Error(`type reducer invalid : ${type}`)
@@ -55,11 +55,9 @@ export const ProductsProvider = ({ children }) => {
 
 	useLayoutEffect(() => {
 		getProducts()
-			.then((data) => dispatch(successRequest(data)))
-			.catch((e) => dispatch(filedRequest(e)))
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+			.then((response) => dispatch(successRequest(response)))
+			.catch((error) => dispatch(filedRequest(error)))
 	}, [])
-
 	return (
 		<productsContext.Provider value={state}>
 			<productsDispatch.Provider value={dispatch}>{children}</productsDispatch.Provider>
