@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getProductsValue } from './productSlice'
 
 const initialState = {
 	character: '',
@@ -25,17 +26,24 @@ export const getFilterCharacter = (state) => state.filter.character
 export const getFilterCategory = (state) => state.filter.category
 
 export const filterProduct = (state) => {
-	let { products } = state.products
+	let newProduct = getProductsValue(state)
 	const character = getFilterCharacter(state)
 	const category = getFilterCategory(state)
 
 	if (character.length > 0) {
-		products = products.filter((product) => product.name.toLowerCase().startsWith(character))
+		newProduct = newProduct.filter((product) => product.name.toLowerCase().startsWith(character))
 	}
 
 	if (category !== 'All') {
-		products = products.filter((product) => product.category === category)
+		newProduct = newProduct.filter((product) => product.category === category)
 	}
+	return newProduct
+}
 
-	return products
+export const getKeysFilterProduct = (state) => {
+	let keys = []
+	filterProduct(state).forEach((product) => {
+		keys.push(product.id)
+	})
+	return keys
 }

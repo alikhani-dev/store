@@ -1,33 +1,24 @@
 import { Grid } from '@mui/material'
+import { getKeysFilterProduct } from '../../Redux/filterSlice'
 import Product from './Product'
+import { shallowEqual, useSelector } from 'react-redux'
 
-const Products = ({ listProduct, characterFilter, categoryFilter }) => {
-	const filterListCharacter = characterFilter
-		? listProduct.filter((item) => item.name.toLowerCase().startsWith(characterFilter))
-		: listProduct
+const Products = () => {
+	const products = useSelector(getKeysFilterProduct, shallowEqual)
 
-	const filterListCategory =
-		categoryFilter !== 'All'
-			? filterListCharacter.filter((item) => item.category === categoryFilter)
-			: filterListCharacter
-
-	if (filterListCategory.length > 0) {
-		return (
-			<>
-				{filterListCategory.map((item) => (
-					<Grid item key={item.key} xs={12} sm={6} md={4} lg={3}>
-						<Product product={item} />
-					</Grid>
-				))}
-			</>
-		)
-	} else {
-		return (
-			<Grid item xs={12}>
-				<p>not found</p>
+	if (products && products.length > 0) {
+		return products.map((id) => (
+			<Grid item key={id} xs={12} sm={6} md={4} lg={3}>
+				<Product id={id} />
 			</Grid>
-		)
+		))
 	}
+
+	return (
+		<Grid item xs={12}>
+			<p>not found</p>
+		</Grid>
+	)
 }
 
 export default Products

@@ -1,10 +1,15 @@
 import { useLayoutEffect, useState } from 'react'
 import { Grid, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 import { getCategory } from '../../Service'
+import { useDispatch, useSelector } from 'react-redux'
+import { filterCategory, filterCharacter, getFilterCategory } from '../../Redux/filterSlice'
 
-const Filter = ({ setCharacterFilter, setCategoryFilter, categoryFilter }) => {
-	const [category, setCategory] = useState([])
+const Filter = () => {
+    const [category, setCategory] = useState([])
+	const dispatch = useDispatch()
+	const categoryFilter = useSelector(getFilterCategory)
 
+    // TODO
 	useLayoutEffect(() => {
 		getCategory()
 			.then((res) => setCategory(res))
@@ -12,7 +17,7 @@ const Filter = ({ setCharacterFilter, setCategoryFilter, categoryFilter }) => {
 	}, [])
 
 	const handleChange = (event) => {
-		setCategoryFilter(event.target.value)
+		dispatch(filterCategory(event.target.value))
 	}
 	const selectItem =
 		category.length > 0 &&
@@ -31,7 +36,7 @@ const Filter = ({ setCharacterFilter, setCategoryFilter, categoryFilter }) => {
 					<TextField
 						fullWidth
 						style={{ maxWidth: '700px' }}
-						onChange={({ target }) => setCharacterFilter(target.value.toLowerCase())}
+						onChange={({ target }) => dispatch(filterCharacter(target.value.toLowerCase()))}
 						label='Search ....'
 					/>
 				</Grid>
