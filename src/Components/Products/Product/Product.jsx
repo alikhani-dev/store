@@ -1,10 +1,14 @@
 import { Card, Typography, CardContent, CardMedia, CardActions } from '@mui/material'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { addCommasToNumber } from '../../../Helper'
+import { getProductByID } from '../../../Redux/productSlice'
 import Actions from './ProductAction'
 import useStyles from './Styles'
 
-const Product = ({ product }) => {
-	const { image, name, price, description, status, id } = product
+const Product = ({ id }) => {
+	const product = useSelector(getProductByID(id))
+	const { image, name, price, description, status } = product
 	const styles = useStyles(status)
 
 	return (
@@ -23,7 +27,7 @@ const Product = ({ product }) => {
 			</CardContent>
 			<CardActions className={styles.action}>
 				<Typography variant='body2' m={2}>
-					${price}
+					${addCommasToNumber(price)}
 				</Typography>
 				<Actions product={product} />
 			</CardActions>

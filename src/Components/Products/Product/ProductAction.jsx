@@ -5,17 +5,16 @@ import {
 	RemoveCircleOutlineOutlined,
 } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
-import { useCart } from '../../../Context'
-import { addProduct, decrementProduct, incrementProduct, removeProduct } from '../../../Context/CartProvider'
 import { checkExist, countProducts } from '../../../Helper'
+import { useSelector, useDispatch } from 'react-redux'
+import { addProduct, decrementProduct, getSelectItem, incrementProduct, removeProduct } from '../../../Redux/cartSlice'
+
 const ProductAction = ({ product }) => {
-	const {
-		dispatch,
-		state: { selectedItem },
-	} = useCart()
 	const { id, status } = product
-	const countProduct = countProducts(selectedItem, id)
-	const existProduct = checkExist(selectedItem, id)
+	const selectedItems = useSelector(getSelectItem)
+	const dispatch = useDispatch()
+	const countProduct = countProducts(selectedItems, id)
+	const existProduct = checkExist(selectedItems, id)
 
 	return (
 		<div>

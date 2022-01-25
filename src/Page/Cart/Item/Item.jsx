@@ -1,15 +1,17 @@
 import { Grid, CardMedia, CardContent, Typography, Card } from '@mui/material'
-import { useCart } from '../../../Context'
-import { countProducts } from '../../../Helper'
+import { addCommasToNumber, countProducts } from '../../../Helper'
 import useStyles from './Styles'
 import { Box } from '@mui/system'
 import Actions from './ItemActions'
+import { useSelector } from 'react-redux'
+import { getSelectItem } from '../../../Redux/cartSlice'
 
 const Item = ({ product }) => {
-	const { state:{selectedItem} } = useCart()
+	const selectedItem = useSelector(getSelectItem)
 	const { image, name, price, id } = product
 	const countProduct = countProducts(selectedItem, id)
 	const styles = useStyles()
+
 	return (
 		<Grid item xs={12} md={6} lg={4}>
 			<Card className={styles.card}>
@@ -19,13 +21,13 @@ const Item = ({ product }) => {
 						<Typography variant='h5' gutterBottom>
 							{name}
 						</Typography>
-						<Typography>Price : ${price}</Typography>
+						<Typography>Price : ${addCommasToNumber(price)}</Typography>
 						<Typography variant='subtitle1' color='text.secondary' component='div'>
-							Total : ${price * countProduct}
+							Total : ${addCommasToNumber(price * countProduct)}
 						</Typography>
 					</CardContent>
 					<Box className={styles.boxChild}>
-						<Actions countProduct={countProduct} id={id}/>
+						<Actions countProduct={countProduct} id={id} />
 					</Box>
 				</Box>
 			</Card>
