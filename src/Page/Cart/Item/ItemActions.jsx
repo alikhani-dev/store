@@ -1,10 +1,10 @@
 import { AddCircleOutlineOutlined, DeleteOutlineOutlined, RemoveCircleOutlineOutlined } from '@mui/icons-material'
 import { IconButton, Typography } from '@mui/material'
-import { useCart } from '../../../Context'
-import { decrementProduct, incrementProduct, removeProduct } from '../../../Context/CartProvider'
+import { useDispatch } from 'react-redux'
+import { decrementProduct, incrementProduct, removeProduct } from '../../../Redux/cartSlice'
 
 const ItemActions = ({ countProduct, id }) => {
-	const { dispatch } = useCart()
+	const dispatch = useDispatch()
 
 	return (
 		<>

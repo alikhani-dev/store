@@ -1,18 +1,19 @@
 import { AppBar, Badge, IconButton, Toolbar, Typography } from '@mui/material'
 import { ShoppingCartOutlined } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
+import { getSelectItemKeys } from '../../Redux/cartSlice'
+import { useSelector } from 'react-redux'
+import { useAuth } from '../../Context'
 import NotRegistered from './NotRegistered'
 import Registered from './Registered'
-import { useAuth, useCart } from '../../Context'
 import useStyles from './Styles'
 
 const Navbar = () => {
 	const styles = useStyles()
-	const {
-		state: { selectedItem },
-	} = useCart()
+	const selectedItem = useSelector(getSelectItemKeys)
 	const { user } = useAuth()
 	const navigate = useNavigate()
+    
 	return (
 		<AppBar className={styles.appBar} position='sticky'>
 			<Toolbar className={styles.toolbar}>

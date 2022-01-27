@@ -1,28 +1,20 @@
-import { useState } from 'react'
-import { Products as ListProduct, Filter } from '../../Components'
-import { useProducts } from '../../Context'
+import { Products, Filter } from '../../Components'
+import { getProducts, getStatus } from '../../Redux/productSlice'
+import { useSelector } from 'react-redux'
 import { Main } from '../../Layout'
 import { Grid } from '@mui/material'
 import Skeletons from './Skeleton'
 
 const Home = () => {
-	const { loading, products } = useProducts()
-	const [characterFilter, setCharacterFilter] = useState()
-	const [categoryFilter, setCategoryFilter] = useState('All')
+	const products = useSelector(getProducts)
+	const status = useSelector(getStatus)
 
 	return (
 		<Main>
 			<Grid container justifyContent='space-evenly' spacing={4} p={4}>
-				<Filter
-					setCharacterFilter={setCharacterFilter}
-					setCategoryFilter={setCategoryFilter}
-					categoryFilter={categoryFilter}
-				/>
-				{loading ? (
-					<Skeletons />
-				) : (
-					<ListProduct listProduct={products} characterFilter={characterFilter} categoryFilter={categoryFilter} />
-				)}
+				{status === 'pending' && <Skeletons />}
+				{status === 'success' && <Filter />}
+				{status === 'success' && <Products listProduct={products} />}
 			</Grid>
 		</Main>
 	)

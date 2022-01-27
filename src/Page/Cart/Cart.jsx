@@ -1,16 +1,16 @@
 import { Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useCart } from '../../Context'
 import CartItem from './Item'
 import PayOff from './PayOff'
 import useStyles from './Style'
+import { useSelector } from 'react-redux'
+import { getSelectItemKeys, getSelectItemValues } from '../../Redux/cartSlice'
 
 const Cart = () => {
-	const {
-		state: { selectedItem },
-	} = useCart()
+	const keys = useSelector(getSelectItemKeys)
+	const selectedItem = useSelector(getSelectItemValues)
 	const styles = useStyles()
-	const existProducts = !selectedItem.length
+	const existProducts = !keys.length
 
 	const CartEmpty = () => (
 		<Grid item my={2} xs={12}>
