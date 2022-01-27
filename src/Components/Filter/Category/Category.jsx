@@ -5,13 +5,15 @@ import { filterCategory, getFilterCategory, typeCategory } from '../../../Redux/
 const Category = () => {
 	const categoryFilter = useSelector(getFilterCategory)
 	const dispatch = useDispatch()
-    
+
 	const handleChangeCategory = (event) => {
 		dispatch(filterCategory(event.target.value))
 	}
-	const selectItem = Object.values(typeCategory).map((value) => {
-		return <MenuItem value={value}>{value.toLowerCase()}</MenuItem>
-	})
+	const selectItem = Object.values(typeCategory).map((value) => (
+		<MenuItem key={value} value={value}>
+			{value.toLowerCase()}
+		</MenuItem>
+	))
 
 	return (
 		<FormControl fullWidth>

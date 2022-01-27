@@ -10,9 +10,12 @@ const Sort = () => {
 		dispatch(filterSortBy(event.target.value))
 	}
 
-	const SelectSortBy = Object.values(typeSort).map((value) => {
-		return <MenuItem value={value}>{value}</MenuItem>
-	})
+	const SelectSortBy = Object.values(typeSort).map((value) => (
+		<MenuItem key={value} value={value}>
+			{value}
+		</MenuItem>
+	))
+    
 	return (
 		<FormControl fullWidth>
 			<InputLabel id='select-sortBy'>sortBy</InputLabel>
