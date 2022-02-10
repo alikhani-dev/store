@@ -1,3 +1,5 @@
-export { useCart, CartProvider } from './CartProvider'
+export { useCart, useCartDispatch, CartProvider } from './CartProvider'
 export { useProducts, useProductsDispatch, ProductsProvider } from './ProductsProvider'
-export { AuthProvider, useAuth } from './AuthenticationProvider'
+export { useAuth, AuthProvider } from './AuthenticationProvider'
+export { FilterProvider } from './FilterProvider'
+export { default } from './Provider'

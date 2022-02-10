@@ -1,48 +1,20 @@
-import { useLayoutEffect, useState } from 'react'
-import { Grid, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
-import { getCategory } from '../../Service'
+import { Grid } from '@mui/material'
+import Category from './Category/Category'
+import Sort from './SortBy/Sort'
+import Search from './Search/Search'
 
-const Filter = ({ setCharacterFilter, setCategoryFilter, categoryFilter }) => {
-	const [category, setCategory] = useState([])
-
-	useLayoutEffect(() => {
-		getCategory()
-			.then((res) => setCategory(res))
-			.catch(() => setCategory([{ value: 'server Error', key: 'error' }]))
-	}, [])
-
-	const handleChange = (event) => {
-		setCategoryFilter(event.target.value)
-	}
-	const selectItem =
-		category.length > 0 &&
-		category.map(({ value, key }) => {
-			return (
-				<MenuItem key={key} value={value.toLowerCase()}>
-					{value}
-				</MenuItem>
-			)
-		})
-
+const Filter = () => {
 	return (
 		<Grid item xs={12}>
 			<Grid container justifyContent='space-around' alignItems='baseline'>
-				<Grid item xs={8} md={10}>
-					<TextField
-						fullWidth
-						style={{ maxWidth: '700px' }}
-						onChange={({ target }) => setCharacterFilter(target.value.toLowerCase())}
-						label='Search ....'
-					/>
+				<Grid item xs={12}>
+					<Search />
 				</Grid>
-				<Grid item xs={3} md={2}>
-					<FormControl fullWidth>
-						<InputLabel id='select-category'>Category</InputLabel>
-						<Select labelId='select-category' value={categoryFilter} label='Category' onChange={handleChange}>
-							<MenuItem value='All'>All</MenuItem>
-							{selectItem}
-						</Select>
-					</FormControl>
+				<Grid item xs={12}>
+					<Category />
+				</Grid>
+				<Grid item xs={12}>
+					<Sort />
 				</Grid>
 			</Grid>
 		</Grid>

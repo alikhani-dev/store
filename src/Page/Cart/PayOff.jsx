@@ -1,13 +1,11 @@
 import { Button, ButtonGroup, Grid, Typography } from '@mui/material'
 import { AttachMoney, Clear } from '@mui/icons-material'
-import { useCart } from '../../Context'
+import { useCart, useCartDispatch } from '../../Context'
 import { clearProduct } from '../../Context/CartProvider'
 
 const PayOff = () => {
-	const {
-		state: { total },
-		dispatch,
-	} = useCart()
+	const { total } = useCart()
+	const dispatch = useCartDispatch()
 
 	return (
 		<>

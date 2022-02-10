@@ -6,9 +6,7 @@ import PayOff from './PayOff'
 import useStyles from './Style'
 
 const Cart = () => {
-	const {
-		state: { selectedItem },
-	} = useCart()
+	const { selectedItem } = useCart()
 	const styles = useStyles()
 	const existProducts = !selectedItem.length
 

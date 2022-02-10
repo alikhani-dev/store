@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import { Home, NotFound, Cart, Product, AddProduct } from '../Page'
+import { Home, NotFound, Cart, Product } from '../Page'
 import { Login, Register } from '../Authentication'
-import ProtectRoute from './ProtectRoute'
 
 const Routing = () => {
 	return (
@@ -12,7 +11,6 @@ const Routing = () => {
 			<Route path='login' element={<Login />} />
 			<Route path='register' element={<Register />} />
 			<Route path='product/:id' element={<Product />} />
-			<Route path='addProduct' element={<ProtectRoute element={<AddProduct />} />} />
 		</Routes>
 	)
 }

@@ -1,20 +1,17 @@
 import { Grid } from '@mui/material'
+import { useProducts } from '../../Context'
+import { combineFilters as filter, useFilter } from '../../Context/FilterProvider'
 import Product from './Product'
 
-const Products = ({ listProduct, characterFilter, categoryFilter }) => {
-	const filterListCharacter = characterFilter
-		? listProduct.filter((item) => item.name.toLowerCase().startsWith(characterFilter))
-		: listProduct
+const Products = () => {
+	const { products } = useProducts()
+	const { category, search, sort } = useFilter()
+	const filterProduct = filter(products, category, search, sort)
 
-	const filterListCategory =
-		categoryFilter !== 'All'
-			? filterListCharacter.filter((item) => item.category === categoryFilter)
-			: filterListCharacter
-
-	if (filterListCategory.length > 0) {
+	if (filterProduct.length > 0) {
 		return (
 			<>
-				{filterListCategory.map((item) => (
+				{filterProduct.map((item) => (
 					<Grid item key={item.key} xs={12} sm={6} md={4} lg={3}>
 						<Product product={item} />
 					</Grid>

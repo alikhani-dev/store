@@ -5,14 +5,13 @@ import {
 	RemoveCircleOutlineOutlined,
 } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
-import { useCart } from '../../../Context'
+import { useCart, useCartDispatch } from '../../../Context'
 import { addProduct, decrementProduct, incrementProduct, removeProduct } from '../../../Context/CartProvider'
 import { checkExist, countProducts } from '../../../Helper'
+
 const ProductAction = ({ product }) => {
-	const {
-		dispatch,
-		state: { selectedItem },
-	} = useCart()
+	const { selectedItem } = useCart()
+	const dispatch = useCartDispatch()
 	const { id, status } = product
 	const countProduct = countProducts(selectedItem, id)
 	const existProduct = checkExist(selectedItem, id)

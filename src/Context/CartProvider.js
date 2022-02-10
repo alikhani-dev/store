@@ -2,12 +2,23 @@ import { createContext, useReducer, useContext } from 'react'
 import { totalProducts } from '../Helper'
 
 const CardContext = createContext()
+const CardDispatch = createContext()
 
 export const useCart = () => {
 	const context = useContext(CardContext)
 
-    if (!context) {
+	if (!context) {
 		throw new Error('useCart must be used with a Provider')
+	}
+
+	return context
+}
+
+export const useCartDispatch = () => {
+	const context = useContext(CardDispatch)
+
+	if (!context) {
+		throw new Error('CardDispatch must be used with a Provider')
 	}
 
 	return context
@@ -70,10 +81,11 @@ const reducer = (state, action) => {
 		}
 
 		default:
-			throw new Error(`type reducer invalid : ${type}`)
+			throw new Error(`Unknown action type : ${type}`)
 	}
 }
 
+// Action reducer
 export const addProduct = (payload) => ({ type: types.ADD_PRODUCT, payload })
 export const removeProduct = (payload) => ({ type: types.REMOVE_PRODUCT, payload })
 export const incrementProduct = (payload) => ({ type: types.INCREMENT_PRODUCT, payload })
@@ -84,5 +96,9 @@ export const payOff = () => ({ type: types.PAYOFF })
 export const CartProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
-	return <CardContext.Provider value={{ state, dispatch }}>{children}</CardContext.Provider>
+	return (
+		<CardContext.Provider value={state}>
+			<CardDispatch.Provider value={dispatch}>{children}</CardDispatch.Provider>
+		</CardContext.Provider>
+	)
 }

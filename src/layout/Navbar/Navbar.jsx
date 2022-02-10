@@ -8,9 +8,7 @@ import useStyles from './Styles'
 
 const Navbar = () => {
 	const styles = useStyles()
-	const {
-		state: { selectedItem },
-	} = useCart()
+	const { selectedItem } = useCart()
 	const { user } = useAuth()
 	const navigate = useNavigate()
 	return (
