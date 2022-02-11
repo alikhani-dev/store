@@ -1,10 +1,13 @@
 import { Container, Grid, Typography, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { addComma } from '../../Helper'
 import useStyles from './Styles'
+
 const Product = ({ product }) => {
 	const { image, name, price, description } = product
 	const navigate = useNavigate()
 	const styles = useStyles()
+
 	return (
 		<Container>
 			<Button className={styles.button} onClick={() => navigate(-1)} variant='outlined'>
@@ -18,7 +21,7 @@ const Product = ({ product }) => {
 					{name}
 				</Typography>
 				<Typography variant='h4' gutterBottom>
-					${price}
+					${addComma(price)}
 				</Typography>
 				<Typography variant='body1'>{description}</Typography>
 			</Grid>

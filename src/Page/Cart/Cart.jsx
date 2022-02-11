@@ -22,7 +22,7 @@ const Cart = () => {
 	)
 
 	return (
-		<Grid container justifyContent='flex-start' columns={12}>
+		<Grid container justifyContent='flex-start' columns={12} spacing={4} p={4}>
 			<Grid item xs={12} mt={3}>
 				<Typography align='center' variant='h4'>
 					Your shopping Cart

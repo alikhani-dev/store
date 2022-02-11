@@ -4,7 +4,7 @@ import {
 	DeleteOutlineOutlined,
 	RemoveCircleOutlineOutlined,
 } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
+import { Grid, IconButton, Typography } from '@mui/material'
 import { useCart, useCartDispatch } from '../../../Context'
 import { addProduct, decrementProduct, incrementProduct, removeProduct } from '../../../Context/CartProvider'
 import { checkExist, countProducts } from '../../../Helper'
@@ -17,7 +17,7 @@ const ProductAction = ({ product }) => {
 	const existProduct = checkExist(selectedItem, id)
 
 	return (
-		<div>
+		<Grid container justifyContent='flex-end' alignItems='center'>
 			{!status ? (
 				<IconButton disabled>
 					<ShoppingCart />
@@ -34,6 +34,7 @@ const ProductAction = ({ product }) => {
 							<DeleteOutlineOutlined />
 						</IconButton>
 					)}
+					{countProduct !== 0 && <Typography variant='body2'>{countProduct}</Typography>}
 					{!existProduct ? (
 						<IconButton onClick={() => dispatch(addProduct(product))} aria-label='add to Cart'>
 							<ShoppingCart />
@@ -45,7 +46,7 @@ const ProductAction = ({ product }) => {
 					)}
 				</>
 			)}
-		</div>
+		</Grid>
 	)
 }
 

@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useProducts } from '../../Context'
 import { Main } from '../../Layout'
+import Loading from './Loading'
 import Product from './Product'
 
 const LogicProduct = () => {
@@ -15,7 +16,7 @@ const LogicProduct = () => {
 		}
 	}, [id, products])
 
-	return <Main>{!item || loading ? <p>please Wait...</p> : <Product product={item} />}</Main>
+	return <Main>{!item || loading ? <Loading /> : <Product product={item} />}</Main>
 }
 
 export default LogicProduct

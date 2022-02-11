@@ -78,7 +78,7 @@ const sortProduct = (products, sort) => {
 		case 'descending':
 			return products.sort((a, b) => b.name.localeCompare(a.name))
 		default:
-			return products
+			throw new Error(`Unknown sort type : ${sort}`)
 	}
 }
 

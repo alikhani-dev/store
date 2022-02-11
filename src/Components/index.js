@@ -1,3 +1,3 @@
-export { default as Products } from './Products'
-export { default as Toast } from './Toast'
-export { default as Filter } from './Filter'
+export { default as Products } from './Products/Products'
+export { default as Filter } from './Filter/Filter'
+export { default as Toast } from './Toast/Toast'

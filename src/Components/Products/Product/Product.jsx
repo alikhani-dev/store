@@ -1,5 +1,6 @@
 import { Card, Typography, CardContent, CardMedia, CardActions } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { addComma } from '../../../Helper'
 import Actions from './ProductAction'
 import useStyles from './Styles'
 
@@ -23,7 +24,7 @@ const Product = ({ product }) => {
 			</CardContent>
 			<CardActions className={styles.action}>
 				<Typography variant='body2' m={2}>
-					${price}
+					${addComma(price)}
 				</Typography>
 				<Actions product={product} />
 			</CardActions>

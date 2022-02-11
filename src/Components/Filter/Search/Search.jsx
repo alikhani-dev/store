@@ -9,15 +9,7 @@ const Search = () => {
 		dispatch(setSearch(event.target.value.toLowerCase()))
 	}
 
-	return (
-		<TextField
-			fullWidth
-			value={search}
-			onChange={handelTextFieldChange}
-			style={{ maxWidth: '700px' }}
-			label='Search ....'
-		/>
-	)
+	return <TextField fullWidth value={search} onChange={handelTextFieldChange} label='Search ....' />
 }
 
 export default Search

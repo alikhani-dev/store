@@ -1,27 +1,29 @@
 import { AddCircleOutlineOutlined, DeleteOutlineOutlined, RemoveCircleOutlineOutlined } from '@mui/icons-material'
-import { IconButton, Typography } from '@mui/material'
-import { useCart } from '../../../Context'
-import { decrementProduct, incrementProduct, removeProduct } from '../../../Context/CartProvider'
+import { decrementProduct, incrementProduct, removeProduct, useCartDispatch } from '../../../Context/CartProvider'
+import { Grid, IconButton, Typography } from '@mui/material'
 
 const ItemActions = ({ countProduct, id }) => {
-	const { dispatch } = useCart()
+	const dispatch = useCartDispatch()
 
 	return (
-		<>
-			{countProduct === 1 ? (
-				<IconButton aria-label='remove' onClick={() => dispatch(removeProduct(id))}>
-					<DeleteOutlineOutlined />
-				</IconButton>
-			) : (
-				<IconButton aria-label='decrement' onClick={() => dispatch(decrementProduct(id))}>
+		<Grid container justifyContent='flex-end' alignItems='center' pr={3}>
+			{countProduct > 1 && (
+				<IconButton onClick={() => dispatch(decrementProduct(id))} aria-label='decrement Product'>
 					<RemoveCircleOutlineOutlined />
 				</IconButton>
 			)}
-			<Typography>{countProduct}</Typography>
-			<IconButton aria-label='increment' onClick={() => dispatch(incrementProduct(id))}>
-				<AddCircleOutlineOutlined />
-			</IconButton>
-		</>
+			{countProduct === 1 && (
+				<IconButton onClick={() => dispatch(removeProduct(id))} aria-label='remove Product'>
+					<DeleteOutlineOutlined />
+				</IconButton>
+			)}
+			{countProduct !== 0 && <Typography variant='body1'>{countProduct}</Typography>}
+			{
+				<IconButton onClick={() => dispatch(incrementProduct(id))} aria-label='increment Product'>
+					<AddCircleOutlineOutlined />
+				</IconButton>
+			}
+		</Grid>
 	)
 }
 

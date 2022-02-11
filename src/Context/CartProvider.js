@@ -40,9 +40,7 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
-	const { type } = action
-
-	switch (type) {
+	switch (action.type) {
 		case types.INCREMENT_PRODUCT: {
 			const id = action.payload
 			const index = state.selectedItem.findIndex((item) => item.id === id)
@@ -81,7 +79,7 @@ const reducer = (state, action) => {
 		}
 
 		default:
-			throw new Error(`Unknown action type : ${type}`)
+			throw new Error(`Unknown action type : ${action.type}`)
 	}
 }
 

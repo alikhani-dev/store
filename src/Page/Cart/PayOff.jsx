@@ -1,30 +1,27 @@
 import { Button, ButtonGroup, Grid, Typography } from '@mui/material'
 import { AttachMoney, Clear } from '@mui/icons-material'
-import { useCart, useCartDispatch } from '../../Context'
-import { clearProduct } from '../../Context/CartProvider'
+import { useCart } from '../../Context'
+import { addComma } from '../../Helper'
 
 const PayOff = () => {
 	const { total } = useCart()
-	const dispatch = useCartDispatch()
 
 	return (
-		<>
-			<Grid item xs={12} p={4}>
-				<Typography variant='h6' paragraph>
-					total all product : $ {total}
-				</Typography>
-				<ButtonGroup variant='outlined' aria-label='outlined primary button group'>
-					<Button>
-						<AttachMoney />
-						Pay
-					</Button>
-					<Button onClick={dispatch(clearProduct)}>
-						<Clear />
-						Clear
-					</Button>
-				</ButtonGroup>
-			</Grid>
-		</>
+		<Grid item xs={12} p={4}>
+			<Typography variant='h6' paragraph>
+				total all product : $ {addComma(total)}
+			</Typography>
+			<ButtonGroup variant='outlined' aria-label='outlined primary button group'>
+				<Button>
+					<AttachMoney />
+					Pay
+				</Button>
+				<Button>
+					<Clear />
+					Clear
+				</Button>
+			</ButtonGroup>
+		</Grid>
 	)
 }
 

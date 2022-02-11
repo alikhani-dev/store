@@ -6,6 +6,7 @@ import Skeletons from './Skeleton'
 
 const Home = () => {
 	const { loading } = useProducts()
+    
 	return (
 		<Main>
 			<Grid container justifyContent='space-evenly' spacing={4} p={4}>

@@ -18,3 +18,7 @@ export const findProducts = (value, state) => {
 export const totalProducts = (arr) => {
 	return arr.reduce((total, product) => total + product.price * product.count, 0)
 }
+
+export const addComma = (num) => {
+    return num.toLocaleString()
+}
