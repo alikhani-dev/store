@@ -7,10 +7,6 @@ const Skeletons = () => {
 			<Card />
 			<Card />
 			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
 		</>
 	)
 }

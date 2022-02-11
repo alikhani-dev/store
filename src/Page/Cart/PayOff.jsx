@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Grid, Typography } from '@mui/material'
 import { AttachMoney, Clear } from '@mui/icons-material'
-import { useCart } from '../../Context'
-import { addComma } from '../../Helper'
+import { useCart } from '../../context'
+import { addComma } from '../../helper'
 
 const PayOff = () => {
 	const { total } = useCart()

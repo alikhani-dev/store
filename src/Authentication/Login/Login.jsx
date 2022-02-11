@@ -3,9 +3,9 @@ import { Button, Card, CardContent, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { schema, defaultValues } from './validation'
-import { useAuth } from '../../Context'
-import { Toast } from '../../Components'
-import Input from '../FormTools'
+import { useAuth } from '../../context'
+import { Toast } from '../../components'
+import Input from '../FormTools/CustomTextField'
 import useStyles from './Style'
 
 const Login = () => {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Avatar, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
-import { useAuth } from '../../../Context'
+import { useAuth } from '../../../context'
 
 const Registered = () => {
 	const [anchorElUser, setAnchorElUser] = useState(null)

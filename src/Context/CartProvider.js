@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext } from 'react'
-import { totalProducts } from '../Helper'
+import { totalProducts } from '../helper'
 
 const CardContext = createContext()
 const CardDispatch = createContext()

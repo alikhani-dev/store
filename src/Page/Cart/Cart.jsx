@@ -1,22 +1,17 @@
 import { Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useCart } from '../../Context'
-import CartItem from './Item'
+import { useCart } from '../../context'
 import PayOff from './PayOff'
-import useStyles from './Style'
+import Product from './Product/Product'
 
 const Cart = () => {
 	const { selectedItem } = useCart()
-	const styles = useStyles()
 	const existProducts = !selectedItem.length
 
 	const CartEmpty = () => (
 		<Grid item my={2} xs={12}>
-			<Typography variant='h6' xs={{ variant: 'body2' }} align='center'>
-				You have no items in shopping cart ,
-				<Link className={styles.link} to='/'>
-					start adding some !
-				</Link>
+			<Typography variant='h6' align='center'>
+				You have no items in shopping cart ,<Link to='/'>start adding some !</Link>
 			</Typography>
 		</Grid>
 	)
@@ -28,7 +23,11 @@ const Cart = () => {
 					Your shopping Cart
 				</Typography>
 			</Grid>
-			{existProducts ? <CartEmpty /> : selectedItem.map((product) => <CartItem key={product.id} product={product} />)}
+			<Grid container>
+				<Grid item xs={12}>
+					{existProducts ? <CartEmpty /> : selectedItem.map((product) => <Product product={product} />)}
+				</Grid>
+			</Grid>
 			{!existProducts && <PayOff />}
 		</Grid>
 	)

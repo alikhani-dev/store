@@ -3,7 +3,7 @@ import { ShoppingCartOutlined } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import NotRegistered from './NotRegistered'
 import Registered from './Registered'
-import { useAuth, useCart } from '../../Context'
+import { useAuth, useCart } from '../../context'
 import useStyles from './Styles'
 
 const Navbar = () => {

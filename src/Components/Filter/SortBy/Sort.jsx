@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import { setSort, sortList, useFilter, useFilterDispatch } from '../../../Context/FilterProvider'
+import { setSort, sortList, useFilter, useFilterDispatch } from '../../../context/FilterProvider'
 
 const Sort = () => {
 	const { sort } = useFilter()

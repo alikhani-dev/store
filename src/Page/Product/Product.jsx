@@ -1,6 +1,6 @@
 import { Container, Grid, Typography, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { addComma } from '../../Helper'
+import { addComma } from '../../helper'
 import useStyles from './Styles'
 
 const Product = ({ product }) => {
@@ -13,10 +13,10 @@ const Product = ({ product }) => {
 			<Button className={styles.button} onClick={() => navigate(-1)} variant='outlined'>
 				Go Back
 			</Button>
-			<Grid item textAlign='center' xs={12} md>
+			<Grid textAlign='center'>
 				<img src={image} alt={name} />
 			</Grid>
-			<Grid item xs={12} md>
+			<Grid>
 				<Typography variant='h2' gutterBottom>
 					{name}
 				</Typography>

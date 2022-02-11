@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material'
-import { setSearch, useFilter, useFilterDispatch } from '../../../Context/FilterProvider'
+import { setSearch, useFilter, useFilterDispatch } from '../../../context/FilterProvider'
 
 const Search = () => {
 	const { search } = useFilter()

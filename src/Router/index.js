@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import { Home, NotFound, Cart, Product } from '../Page'
-import { Login, Register } from '../Authentication'
+import { Home, NotFound, Cart, Product } from '../page'
+import { Login, Register } from '../authentication'
 
 const Routing = () => {
 	return (

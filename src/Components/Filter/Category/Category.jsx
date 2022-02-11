@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import { categoryList, setCategory, useFilter, useFilterDispatch } from '../../../Context/FilterProvider'
+import { categoryList, setCategory, useFilter, useFilterDispatch } from '../../../context/FilterProvider'
 
 const Category = () => {
 	const { category } = useFilter()

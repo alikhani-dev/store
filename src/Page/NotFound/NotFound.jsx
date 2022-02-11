@@ -1,4 +1,4 @@
-import { Main } from '../../Layout'
+import { Main } from '../../layout'
 
 const Notfound = () => {
 	return <Main>Notfound</Main>

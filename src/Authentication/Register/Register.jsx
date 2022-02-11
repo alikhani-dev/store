@@ -3,9 +3,9 @@ import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { schema, defaultValues } from './validation'
-import { Toast } from '../../Components'
-import { useAuth } from '../../Context'
-import Input from '../FormTools'
+import { Toast } from '../../components'
+import { useAuth } from '../../context'
+import Input from '../FormTools/CustomTextField'
 import useStyles from './Style'
 
 const Register = () => {
